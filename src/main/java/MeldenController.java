@@ -36,7 +36,7 @@ public class MeldenController implements Serializable {
 		MeldendePerson tempMelder = new MeldendePerson(vorname, nachname, telefonnummer,tmpIstAnonym);
 		
 		int tempLfdNr = geisternetzGesamtListe.naechsteLfdNr();
-		Geisternetz tempNetz = new Geisternetz(tempLfdNr, breitengrad, laengengrad, groesse, "Gemeldet", tempMelder);
+		Geisternetz tempNetz = new Geisternetz(tempLfdNr, breitengrad, laengengrad, groesse, Status.GEMELDET, tempMelder);
 		geisternetzGesamtListe.netzHinzufuegen(tempNetz);
 		felderLeeren();
 	}

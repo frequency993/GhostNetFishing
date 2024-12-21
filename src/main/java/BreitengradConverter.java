@@ -8,7 +8,7 @@ import jakarta.faces.convert.FacesConverter;
 @FacesConverter("breitengradConverter")
 public class BreitengradConverter implements Converter {
 
-    private static final String REGEX = "^-?\\d{1,3}\\.\\d{3,}$"; // Maximal 3 Vorkommastellen
+	private static final String REGEX = "^-?\\d*\\.\\d{3,}$";
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -22,7 +22,7 @@ public class BreitengradConverter implements Converter {
             throw new ConverterException(
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, 
                                  "Ungültiges Format", 
-                				 "Bitte mindestens 3 Nachkommastellen unter Verwendung von '.' angeben, z.B. 123.456!")
+                				 "Bitte nur Zahlen und mindestens 3 Nachkommastellen unter Verwendung von '.' angeben, z.B. 123.456!")
             );
         }
 
@@ -43,7 +43,7 @@ public class BreitengradConverter implements Converter {
             throw new ConverterException(
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, 
                                  "Wertebereich überschritten", 
-                                 "Breitengrad muss zwischen -90 und 90 liegen.")
+                                 "Breitengrad muss Werte zwischen -90 und 90 haben.")
             );
         }
 
@@ -66,6 +66,6 @@ public class BreitengradConverter implements Converter {
         }
 
         // Formatierung: genau 3 Nachkommastellen
-        return String.format("%.3f", (Double) value);
+        return String.valueOf(value);
     }
 }

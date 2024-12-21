@@ -28,7 +28,7 @@ public class GeisternetzGesamtListe implements Serializable {
 		return LfdNr;
 	}
 	
-	public void statusAendern(int lfdNr, String status, Person verschollenMeldendePerson) {
+	public void statusAendern(int lfdNr, Status status, Person verschollenMeldendePerson) {
 		int index = lfdNr - 1;
 		liste.get(index).setStatus(status);
 	}
@@ -36,7 +36,7 @@ public class GeisternetzGesamtListe implements Serializable {
 	public void bergendePersonEintragen(int lfdNr, Person bergendePerson ) {
 		int index = lfdNr -1;
 		liste.get(index).setBergendePerson(bergendePerson);
-		liste.get(index).setStatus("Bergung bevorstehend");
+		liste.get(index).setStatus(Status.BEVORSTEHEND);
 	}
 	
 	public static GeisternetzGesamtListe getInstance() {
@@ -58,18 +58,20 @@ public class GeisternetzGesamtListe implements Serializable {
 	}
 	
 	// Gibt eine Liste von allen Netzen zurück, die nicht als verschollen oder bereits geborgen gemeldet sind.
+	// Gibt eine Liste von allen Netzen zurück, die nicht als verschollen oder bereits geborgen gemeldet sind.
 	public List<Geisternetz> filterListe() {
 	    List<Geisternetz> gefilterteListe = new ArrayList<>();
 	    
 	    for (Geisternetz netz : liste) {
-	        // Filtert Geisternetze mit Status != "Verschollen" und prüft die Zuordnung zur bergenden Person
-	        if (!"Verschollen".equals(netz.getStatus()) && !"Geborgen".equalsIgnoreCase(netz.getStatus())) {
+	        // Filtert Geisternetze mit Status != VERSCHOLLEN und != GEBORGEN
+	        if (netz.getStatus() != Status.VERSCHOLLEN && netz.getStatus() != Status.GEBORGEN) {
 	            gefilterteListe.add(netz);
 	        }
 	    }
 	    
 	    return gefilterteListe;
 	}
+
 	
 	public List<Geisternetz> getListe() {
 		return liste;

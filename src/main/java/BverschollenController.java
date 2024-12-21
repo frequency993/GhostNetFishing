@@ -24,9 +24,8 @@ public class BverschollenController implements Serializable {
 	
 	public void alsVerschollenMelden() {
 		int tmpLfdNr = ausgewaeltesNetz.getLfdNr();
-		geisternetzGesamtListe.statusAendern(tmpLfdNr, "Verschollen", bergendePerson);
+		geisternetzGesamtListe.statusAendern(tmpLfdNr, Status.VERSCHOLLEN, bergendePerson);
 	}
-
 
 	// Getter und Setter
 		

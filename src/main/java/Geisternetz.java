@@ -4,21 +4,21 @@ public class Geisternetz implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	// Eigenschaften von Geisternetzen
-	private int lfdNr;
 	private double breitengrad;
 	private double laengengrad;
 	private int groesse;
+	private int lfdNr;
 	private MeldendePerson meldendePerson;
 	private Person verschollenMeldendePerson;
 	private Person bergendePerson;
-	private String status;
+	private Status status;
 	
 //	Leerer Public Konstruktor
 	public Geisternetz() {
 	}
 
 	// Konstruktor mit Parametern
-	public Geisternetz(int lfdNr, double breitengrad, double laengengrad, int groesse, String status, MeldendePerson meldendePerson) {
+	public Geisternetz(int lfdNr, double breitengrad, double laengengrad, int groesse, Status status, MeldendePerson meldendePerson) {
 		super();
 		this.breitengrad = breitengrad;
 		this.laengengrad = laengengrad;
@@ -62,11 +62,11 @@ public class Geisternetz implements Serializable {
 		this.groesse = groesse;
 	}
 
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 

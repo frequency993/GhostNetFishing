@@ -25,7 +25,7 @@ public class MverschollenController implements Serializable {
 	public void alsVerschollenMelden() {
 		Person tmpVerschollenMeldendePerson = new Person(vorname, nachname,telefonnummer);
 		int tmpLfdNr = ausgewaeltesNetz.getLfdNr();
-		geisternetzGesamtListe.statusAendern(tmpLfdNr, "Verschollen", tmpVerschollenMeldendePerson);
+		geisternetzGesamtListe.statusAendern(tmpLfdNr, Status.VERSCHOLLEN, tmpVerschollenMeldendePerson);
 	}
 	
 // Danach die Felder wieder leeren

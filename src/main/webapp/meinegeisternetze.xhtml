@@ -57,7 +57,7 @@
 	        <p:column headerText="Auswahl">
 	            <p:selectBooleanCheckbox
 	                value="#{meineGeisternetzeController.selectedNetsMap[netz]}"
-	                rendered="#{netz.status ne 'Geborgen'}" />
+	                rendered="#{netz.status.bezeichnung ne 'Geborgen'}" />
 	        </p:column>
 	
 	        <!-- Spalten mit Daten -->
@@ -77,8 +77,8 @@
 	            <h:outputText value="#{netz.groesse}" />
 	        </p:column>
 	
-	        <p:column headerText="Status" sortBy="#{netz.status}">
-	            <h:outputText value="#{netz.status}" />
+	        <p:column headerText="Status" sortBy="#{netz.status.bezeichnung}">
+	            <h:outputText value="#{netz.status.bezeichnung}" />
 	        </p:column>
 	
 	        <!-- Footer für die Gesamtzahl -->

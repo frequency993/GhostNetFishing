@@ -35,8 +35,8 @@ public class MeineGeisternetzeController implements Serializable {
 
             // Nur wenn Checkbox = true und Status noch nicht "Geborgen"
             if (Boolean.TRUE.equals(istAusgewaehlt) 
-                && !"Geborgen".equalsIgnoreCase(netz.getStatus())) {
-                netz.setStatus("Geborgen");
+                    && netz.getStatus() != Status.GEBORGEN) {
+                    netz.setStatus(Status.GEBORGEN);
             }
         }
         // Die Map leeren, um die Checkboxen zurückzusetzen
