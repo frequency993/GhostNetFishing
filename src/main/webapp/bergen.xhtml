@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<h:head>
+  <h:outputStylesheet library="css" name="styles.css" />
+  <title>GhostNetFishing</title>
+</h:head>
+<h:body>
+<!-- Navigationsleiste, einfache Links da keine Logik erforderlich -->
+	<header> 
+	    <div class="navigationsleiste">
+	        <div class="navigations-logo">
+<!-- Logo-Bild -->
+	            <h:graphicImage library="bilder" name="logo.webp" alt="Logo" styleClass="logo-bild" />
+	        </div>
+	        <ul class="navbar-links">
+	            <li><h:link value="Startseite" outcome="index" styleClass="navbar-link" /></li>
+	            <li><h:link value="Zum Bergen eintragen" outcome="bergen" styleClass="navbar-link" /></li>
+	            <li><h:link value="Geisternetz als Verschollen melden" outcome="b_verschollen.xhtml" styleClass="navbar-link" /></li>
+	            <li><h:link value="Meine Geisternetze" outcome= "meinegeisternetze.xhtml" styleClass="navbar-link" /></li>
+	        </ul>
+	    </div>
+	</header>
+	
+	<h1>Hallo <span class="highlight">#{bergenController.bergendePerson.vorname}</span>!</h1>
+
+	<p:panel>
+		<f:facet name="header">
+			<p>Hier siehst du eine Übersicht der noch zu bergenden Geisternetze.</p>
+			<p>Wähle ein Geisternetz aus der Tabelle aus, welches du bergen möchtest und klicke anschließend auf "Bergen".</p>
+			<p>Geisternetze, welche bereits von jemandem als Bergender ausgewählt wurden, können nicht von dir ausgewählt werden.
+			   Du kannst allerdings einsehen, wer sich eingetragen hat und dich mit der anderen Person abstimmen.</p>
+		</f:facet>
+		<p></p>
+		
+		<h:form id="eingabeMaske">
+			<p:panelGrid columns="4"
+			                 columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+			                 layout="grid"
+			                 styleClass="ui-panelgrid-blank ui-fluid"
+			                 style="border:0px none; background-color:transparent;">
+			
+			        <p:row styleClass="my-heading-row" style="font-weight: 900">
+			            Persönliche Daten
+			        </p:row>
+			
+			        <p:outputLabel for="vorname" value="Vorname:"/>
+			        <p:inputText id="vorname" value="#{bergenController.bergendePerson.vorname}" required="true" label="Vorname" />
+			
+			        <p:outputLabel for="nachname" value="Nachname:"/>
+			        <p:inputText id="nachname" value="#{bergenController.bergendePerson.nachname}" required="true" label="Nachname" />
+			
+			        <p:outputLabel for="telefonnummer" value="Telefonnummer:"/>
+			        <p:inputText id="telefonnummer" value="#{bergenController.bergendePerson.telefonnummer}" required="false" label="telefonnummer" />
+			
+			        <p:row styleClass="my-heading-row" style="font-weight: 900">
+			            Ausgewähltes Geisternetz
+			        </p:row>
+			        
+						<p:outputLabel for="breitengrad" value="Laufende Nummer)"/>
+					    <p:inputText id="laufendeNummer" 
+						    		 value="#{bergenController.ausgewaeltesNetz.lfdNr}" 
+						      		 required="true" 
+						      		 label="Laufende Nummer" 
+						      		 readonly = "true"
+						      		 placeholder="Bitte in der Tabelle eine Auswahl treffen."/>
+
+					<p:row styleClass="my-heading-row">
+			            GPS-Koordinaten in dezimaler Notation:
+			        </p:row>
+				        <p:outputLabel for="breitengrad" value="Breitengrad °(N)"/>
+				        <p:inputText id="breitengrad" 
+				        			 value="#{bergenController.ausgewaeltesNetz.breitengrad}" 
+				        			 required="true" 
+				        			 label="Breitengrad" 
+				        			 readonly = "true"
+				        			 placeholder="Bitte in der Tabelle eine Auswahl treffen." />
+				
+				        <p:outputLabel for="laengengrad" value="Laengengrad °(E)"/>
+				        <p:inputText id="laengengrad" 
+				        			 value="#{bergenController.ausgewaeltesNetz.laengengrad}" 
+				        			 required="true" 
+				        			 label="Laengengrad"
+				        			 readonly = "true"
+				        			 placeholder="Bitte in der Tabelle eine Auswahl treffen." />
+			
+			        <p:outputLabel for="groesse" value="Geschätzte Größe in m²"/>
+			         <p:inputText id="groesse" 
+			         			  value="#{bergenController.ausgewaeltesNetz.groesse}"
+			         			  required="true" 
+			         			  label="Groesse" 
+			         			  readonly = "true"
+			         			  placeholder="Bitte in der Tabelle eine Auswahl treffen."/>
+			
+			        <p:row>
+			            <p:column styleClass="ui-grid-col-12">
+			                <p>*<span class="unterstrichen">Diese Felder sind Pflichtfelder.</span></p>
+			                <p:messages autoUpdate="true" /> 
+			            </p:column>
+			        </p:row>
+			
+			        <p:row>
+			            <p:column styleClass="ui-grid-col-12">
+			                 <p:commandButton value="Bergen" action="#{bergenController.alsBergendEintragen}" update="netzTabelle eingabeMaske" icon="pi pi-check" style="width: auto" />
+			            </p:column>
+			        </p:row>
+			    </p:panelGrid>
+   		</h:form>
+		
+	</p:panel>
+	 
+	<h2>Übersicht der noch zu bergenden Geisternetze</h2>
+
+    <h:form id="netzTabelle">
+	    <p:dataTable var="netz" value="#{geisternetzGesamtListe.liste}" 
+	                 widgetVar="netzTable"
+	                 paginator="true" rows="10" 
+	                 resizableColumns="true" 
+	                 styleClass="customTable"
+	                 sortMode="multiple"
+	                 tableStyle="width: 100%; border: 1px solid #ccc; table-layout: auto;"
+	                 lazy="false"
+	                 autoLayout="true">
+	        
+	        <!-- Spalten mit Sortieroptionen -->
+	        <p:column headerText="LfdNr">
+	        	<h:outputText value="#{netz.lfdNr}" />
+	        </p:column>
+	        
+	        <p:column headerText="Breitengrad">
+	            <h:outputText value="#{netz.breitengrad}" />
+	        </p:column>
+	        
+	        <p:column headerText="Längengrad">
+	            <h:outputText value="#{netz.laengengrad}" />
+	        </p:column>
+	        
+	        <p:column headerText="Größe" sortBy="#{netz.groesse}">
+	            <h:outputText value="#{netz.groesse}" />
+	        </p:column>
+	        
+	        <p:column headerText="Status" sortBy="#{netz.status}">
+	            <h:outputText value="#{netz.status}" />
+	        </p:column>
+	        
+	        <p:column headerText="Bergende Person">
+	            <h:outputText value="#{netz.bergendePerson != null ? 
+       				 netz.bergendePerson.vorname.concat(' ').concat(netz.bergendePerson.nachname).concat(', ').concat(netz.bergendePerson.telefonnummer) : 'Noch niemand eingetragen.'}" />
+	        </p:column>
+	        
+	       	<p:column>
+				<p:commandButton 
+									value="Auswählen" 
+									styleClass="ui-button-outlined"  
+									update="eingabeMaske"
+									rendered="#{netz.bergendePerson == null}">
+			<!-- Wert des Netz-Objekts aus der Zeile an den Controller übergeben -->
+				<f:setPropertyActionListener value="#{netz}" target="#{bergenController.ausgewaeltesNetz}" />
+				</p:commandButton>
+	        </p:column>
+	        
+	        <!-- Footer-Facette für eine Übersicht -->
+	        <f:facet name="footer">
+	            <h:outputText value="Geisternetze - Total: #{fn:length(geisternetzGesamtListe.liste)}" />
+	        </f:facet>
+	    </p:dataTable>
+    </h:form>
+	<footer class="seiten-footer">
+    <p>Hinweis: Diese Seite ist ein Entwurf und dient nur Demonstrationszwecken.</p>
+	</footer>
+</h:body>
+</html>

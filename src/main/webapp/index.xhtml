@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>GhostNetFishing</title>
+    <h:outputStylesheet library="css" name="styles.css" />
+</h:head>
+<h:body>
+    <div class="container">
+        <h1>Willkommen beim Projekt "GhostNetFishing"</h1>
+        <p>
+            Als Geisternetz bezeichnet man ein Fischernetz, das entweder beim Fischfang verloren gegangen ist oder absichtlich im Meer entsorgt wurde, wo es nun im Ozean treibt oder sich am Meeresgrund verfangen hat. Diese Netze sind gefährlich, da sie weiterhin Fische und andere Meereslebewesen fangen und töten können, ohne jemals wieder eingeholt zu werden.
+        </p>
+        <p>
+            <strong>Aber <span class="highlight">DU</span> kannst helfen!</strong> Melde hier von dir festgestellte Geisternetze oder trage dich als Bergender ein, um diese Netze zu bergen und unsere Meere sauberer zu machen.
+        </p>
+        <div class="button-container">
+            <h:form>
+            	<!-- Keine Controller für die Links, da keine Logik erforderlich -->
+                <p:button value="Geisternetze melden" outcome="melden" styleClass="ui-button-raised index-button" />
+                <p:button value="Geisternetze bergen" outcome="login" styleClass="ui-button-raised index-button" />
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>

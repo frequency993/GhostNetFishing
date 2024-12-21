@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<h:head>
+  <h:outputStylesheet library="css" name="styles.css" />
+  <title>GhostNetFishing</title>
+</h:head>
+<h:body>
+<!-- Navigationsleiste, einfache Links da keine Logik erforderlich -->
+	<header> 
+	    <div class="navigationsleiste">
+	        <div class="navigations-logo">
+<!-- Logo-Bild -->
+	            <h:graphicImage library="bilder" name="logo.webp" alt="Logo" styleClass="logo-bild" />
+	        </div>
+	        <ul class="navbar-links">
+	            <li><h:link value="Startseite" outcome="index" styleClass="navbar-link" /></li>
+	            <li><h:link value="Zum Bergen eintragen" outcome="bergen" styleClass="navbar-link" /></li>
+	            <li><h:link value="Geisternetz als Verschollen melden" outcome="b_verschollen.xhtml" styleClass="navbar-link" /></li>
+	            <li><h:link value="Meine Geisternetze" outcome= "meinegeisternetze.xhtml" styleClass="navbar-link" /></li>
+	        </ul>
+	    </div>
+	</header>
+	
+	<h1>Übersicht meiner Geisternetze</h1>
+
+	<p:panel>
+		<f:facet name="header">
+			<p>Hier siehst du alle Geisternetze, für die du dich als bergende Person eingetragen hast.</p>
+			<p>Noch nicht geborgene Geisternetze kannst du über die <i>Kästchen</i> auswählen.<br/>
+			   Klicke dann auf "<i>Als geborgen melden!</i>", um die ausgewählten Geisternetze als geborgen zu melden.</p>
+				    <!-- Button zum Melden als 'Geborgen' -->
+	    <p:commandButton value="Als geborgen melden!"
+	                     actionListener="#{meineGeisternetzeController.alsGeborgenMelden()}"
+	                     update=":netzTabelle" />
+		</f:facet>
+	</p:panel>
+
+	<h2>Meine Geisternetze</h2>
+
+
+    <h:form id="netzTabelle">
+	    <p:dataTable var="netz"
+	                 value="#{geisternetzGesamtListe.filterListe(meineGeisternetzeController.bergendePerson)}"
+	                 paginator="true"
+	                 rows="10"
+	                 resizableColumns="true"
+	                 styleClass="customTable"
+	                 sortMode="multiple"
+	                 tableStyle="width: 100%; border: 1px solid #ccc;"
+	                 lazy="false">
+	
+	        <!-- Checkbox-Spalte, nur angezeigt, wenn Status != 'Geborgen' -->
+	        <p:column headerText="Auswahl">
+	            <p:selectBooleanCheckbox
+	                value="#{meineGeisternetzeController.selectedNetsMap[netz]}"
+	                rendered="#{netz.status ne 'Geborgen'}" />
+	        </p:column>
+	
+	        <!-- Spalten mit Daten -->
+	        <p:column headerText="LfdNr">
+	            <h:outputText value="#{netz.lfdNr}" />
+	        </p:column>
+	
+	        <p:column headerText="Breitengrad">
+	            <h:outputText value="#{netz.breitengrad}" />
+	        </p:column>
+	
+	        <p:column headerText="Längengrad">
+	            <h:outputText value="#{netz.laengengrad}" />
+	        </p:column>
+	
+	        <p:column headerText="Größe" sortBy="#{netz.groesse}">
+	            <h:outputText value="#{netz.groesse}" />
+	        </p:column>
+	
+	        <p:column headerText="Status" sortBy="#{netz.status}">
+	            <h:outputText value="#{netz.status}" />
+	        </p:column>
+	
+	        <!-- Footer für die Gesamtzahl -->
+	        <f:facet name="footer">
+	            <h:outputText value="Geisternetze - Total: #{fn:length(geisternetzGesamtListe.filterListe(meineGeisternetzeController.bergendePerson))}" />
+	        </f:facet>
+	    </p:dataTable>
+</h:form>
+    
+	<footer class="seiten-footer">
+    <p>Hinweis: Diese Seite ist ein Entwurf und dient nur Demonstrationszwecken.</p>
+	</footer>
+</h:body>
+</html>

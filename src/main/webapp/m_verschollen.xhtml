@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<h:head>
+  <h:outputStylesheet library="css" name="styles.css" />
+  <title>GhostNetFishing</title>
+</h:head>
+<h:body>
+<!-- Navigationsleiste, einfache Links da keine Logik erforderlich -->
+	<header> 
+	    <div class="navigationsleiste">
+	        <div class="navigations-logo">
+<!-- Logo-Bild -->
+	            <h:graphicImage library="bilder" name="logo.webp" alt="Logo" styleClass="logo-bild" />
+	        </div>
+	        <ul class="navbar-links">
+	            <li><h:link value="Startseite" outcome="index" styleClass="navbar-link" /></li>
+	            <li><h:link value="Neues Geisternetz melden" outcome="melden" styleClass="navbar-link" /></li>
+	            <li><h:link value="Geisternetz als verschollen melden" outcome="m_verschollen.xhtml" styleClass="navbar-link" /></li>
+	        </ul>
+	    </div>
+	</header>
+	
+	<h1>Geisternetz als verschollen melden</h1>
+
+	<p:panel>
+		<f:facet name="header">
+			<p>Du hast festgestellt, dass ein Geisternetz an der gemeldeten Stelle nicht verfügbar ist? <br/>
+			   Super, teile uns dies hier mit:</p>
+			<p>Wähle das entsprechende Geisternetz in der Tabelle über den Knopf "<i>Auswählen</i>", die entsprechenden Daten werden übernommen. <br/>
+			   Gib noch deine persönlichen Daten ein und klicke dann auf "<i>Absenden</i>".</p>
+		</f:facet>
+		<p></p>
+		
+		<h:form id="eingabeMaske">
+			<p:panelGrid columns="4"
+			                 columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+			                 layout="grid"
+			                 styleClass="ui-panelgrid-blank ui-fluid"
+			                 style="border:0px none; background-color:transparent;">
+			
+			        <p:row styleClass="my-heading-row" style="font-weight: 900">
+			            Persönliche Daten
+			        </p:row>
+			
+			        <p:outputLabel for="vorname" value="Vorname:"/>
+			        <p:inputText id="vorname" value="#{mverschollenController.vorname}" required="true" 
+			        		label="Vorname" placeholder="Max"
+			        		validatorMessage="Beim Vornamen sind nur Buchstaben zulässig.">
+			        <f:validateRegex pattern="^[\p{L}]+$"/>
+					</p:inputText>
+			
+			        <p:outputLabel for="nachname" value="Nachname:"/>
+			        <p:inputText id="nachname" value="#{mverschollenController.nachname}" required="true" 
+			        		label="Nachname" placeholder="Mustermann"
+			        		validatorMessage="Beim Nachnamen sind nur Buchstaben zulässig.">
+					<f:validateRegex pattern="^[\p{L}]+$"/>
+					</p:inputText>
+			
+			        <p:outputLabel for="telefonnummer" value="Telefonnummer:"/>
+					<p:inputText id="telefonnummer" value="#{mverschollenController.telefonnummer}" required="true"
+				             label="Telefonnummer" placeholder="Format: +49170123456 - ohne Leerzeichen"
+				             validatorMessage="Die Telefonnummer muss dem Format: '+49170123456 - ohne Leerzeichen' entsprechen">
+				    <f:validateRegex pattern="^\+[1-9]\d{9,14}$"/>
+					</p:inputText>
+			
+			        <p:row styleClass="my-heading-row" style="font-weight: 900">
+			            Ausgewähltes Geisternetz
+			        </p:row>
+			        
+						<p:outputLabel for="breitengrad" value="Laufende Nummer)"/>
+					    <p:inputText id="laufendeNummer" 
+						    		 value="#{mverschollenController.ausgewaeltesNetz.lfdNr}" 
+						      		 required="true" 
+						      		 label="Laufende Nummer" 
+						      		 readonly = "true"
+						      		 placeholder="Bitte in der Tabelle eine Auswahl treffen."/>
+
+					<p:row styleClass="my-heading-row">
+			            GPS-Koordinaten in dezimaler Notation:
+			        </p:row>
+				        <p:outputLabel for="breitengrad" value="Breitengrad °(N)"/>
+				        <p:inputText id="breitengrad" 
+				        			 value="#{mverschollenController.ausgewaeltesNetz.breitengrad}" 
+				        			 required="true" 
+				        			 label="Breitengrad" 
+				        			 readonly = "true"
+				        			 placeholder="Bitte in der Tabelle eine Auswahl treffen." />
+				
+				        <p:outputLabel for="laengengrad" value="Laengengrad °(E)"/>
+				        <p:inputText id="laengengrad" 
+				        			 value="#{mverschollenController.ausgewaeltesNetz.laengengrad}" 
+				        			 required="true" 
+				        			 label="Laengengrad"
+				        			 readonly = "true"
+				        			 placeholder="Bitte in der Tabelle eine Auswahl treffen." />
+			
+			        <p:outputLabel for="groesse" value="Geschätzte Größe in m²"/>
+			         <p:inputText id="groesse" 
+			         			  value="#{mverschollenController.ausgewaeltesNetz.groesse}"
+			         			  required="true" 
+			         			  label="Groesse" 
+			         			  readonly = "true"
+			         			  placeholder="Bitte in der Tabelle eine Auswahl treffen."/>
+			
+			        <p:row>
+			            <p:column styleClass="ui-grid-col-12">
+			                <p>*<span class="unterstrichen">Diese Felder sind Pflichtfelder.</span></p>
+			                <p:messages autoUpdate="true" /> 
+			            </p:column>
+			        </p:row>
+			
+			        <p:row>
+			            <p:column styleClass="ui-grid-col-12">
+			                 <p:commandButton value="Verschollen melden!" action="#{mverschollenController.alsVerschollenMelden}" update="netzTabelle eingabeMaske" icon="pi pi-check" style="width: auto" />
+			            </p:column>
+			        </p:row>
+			    </p:panelGrid>
+   		</h:form>
+		
+	</p:panel>
+
+	<h2>Geisternetz Übersicht</h2>
+
+    <h:form id="netzTabelle">
+	    <p:dataTable var="netz" value="#{geisternetzGesamtListe.filterListe()}" 
+	                 widgetVar="netzTable"
+	                 paginator="true" rows="10" 
+	                 resizableColumns="true" 
+	                 styleClass="customTable"
+	                 sortMode="multiple"
+	                 tableStyle="width: 100%; border: 1px solid #ccc;"
+	                 lazy="false">
+	        
+	        <!-- Spalten mit Sortieroptionen -->
+	        <p:column headerText="LfdNr">
+	        	<h:outputText value="#{netz.lfdNr}" />
+	        </p:column>
+	        
+	        <p:column headerText="Breitengrad">
+	            <h:outputText value="#{netz.breitengrad}" />
+	        </p:column>
+	        
+	        <p:column headerText="Längengrad">
+	            <h:outputText value="#{netz.laengengrad}" />
+	        </p:column>
+	        
+	        <p:column headerText="Größe" sortBy="#{netz.groesse}">
+	            <h:outputText value="#{netz.groesse}" />
+	        </p:column>
+	        
+	        <p:column headerText="Status" sortBy="#{netz.status}">
+	            <h:outputText value="#{netz.status}" />
+	        </p:column>
+	        
+	       	<p:column>
+				<p:commandButton 
+									value="Auswählen" 
+									styleClass="ui-button-outlined"  
+									update="eingabeMaske">
+			<!-- Wert des Netz-Objekts aus der Zeile an den Controller übergeben -->
+				<f:setPropertyActionListener value="#{netz}" target="#{mverschollenController.ausgewaeltesNetz}" />
+				</p:commandButton>
+	        </p:column>
+	        
+	        <!-- Footer-Facette für eine Übersicht -->
+	        <f:facet name="footer">
+	            <h:outputText value="Geisternetze - Total: #{fn:length(geisternetzGesamtListe.filterListe())}" />
+	        </f:facet>
+	    </p:dataTable>
+    </h:form>
+	<footer class="seiten-footer">
+    <p>Hinweis: Diese Seite ist ein Entwurf und dient nur Demonstrationszwecken.</p>
+	</footer>
+</h:body>
+</html>

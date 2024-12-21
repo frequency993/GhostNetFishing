@@ -1,0 +1,105 @@
+/* <u> soll laut Eclipse in HTML5 nicht mehr verwendet werden */
+  .unterstrichen {
+    text-decoration: underline !important;
+  }
+
+/* CSS-Styles für Header/Navbar */
+.navigationsleiste {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #003366; /* Dunkles Blau als Hintergrundfarbe */
+}
+
+.navigations-logo {
+    font-size: 1.5em;
+    color: #fff;
+    font-weight: bold;
+}
+
+.navbar-links {
+    list-style-type: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    gap: 15px !important;
+}
+
+.navbar-link {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    padding: 5px 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-link:hover {
+    background-color: #005bb5;
+    color: #e0e0e0;
+    border-radius: 5px;
+}
+
+.logo-bild {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover; /* Ensures the image scales properly */
+}
+
+/* CSS Styles für Body */
+
+body {
+    background-color: #e0f7fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #004d40;
+    margin: 0;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 65px; /* Platz für den fixierten Footer schaffen */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Zentriert vertikal im Container */
+    align-items: center; /* Zentriert horizontal im Container */
+    height: 100vh; /* Nimmt die volle Höhe des Viewports ein */
+    width: 90%; /* Breite wie zuvor definiert */
+    margin: 0 auto; /* Zentriert horizontal im Viewport */
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 20px;
+    line-height: 1.6;
+    margin: 20px 0;
+}
+
+.highlight {
+    color: #d81b60;
+}
+
+.button-container {
+    margin-top: 40px;
+}
+
+.index-button {
+    margin-right: 10px !important;
+    }
+    
+.seiten-footer {
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    color: #666;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<h:head>
+  <h:outputStylesheet library="css" name="styles.css" />
+  <title>GhostNetFishing</title>
+</h:head>
+<h:body>
+<!-- Navigationsleiste, einfache Links da keine Logik erforderlich -->
+	<header> 
+	    <div class="navigationsleiste">
+	        <div class="navigations-logo">
+<!-- Logo-Bild -->
+	            <h:graphicImage library="bilder" name="logo.webp" alt="Logo" styleClass="logo-bild" />
+	        </div>
+	        <ul class="navbar-links">
+	            <li><h:link value="Startseite" outcome="index" styleClass="navbar-link" /></li>
+	            <li><h:link value="Neues Geisternetz melden" outcome="melden" styleClass="navbar-link" /></li>
+	            <li><h:link value="Geisternetz als verschollen melden" outcome="m_verschollen.xhtml" styleClass="navbar-link" /></li>
+	        </ul>
+	    </div>
+	</header>
+	
+	<h1>Neues Geisternetz melden</h1>
+
+	<p:panel>
+		<f:facet name="header">
+			<p>Hier kannst du von dir festgestellte Geisternetze melden, sodass Freiwillige es lokalisieren und bergen können.</p>
+			<p>Gerne kannst du dies auch anonym tun, lasse hierzu das Feld "Telefonnummer" einfach frei. Vorname und Name kannst du in diesem Fall frei wählen, da sie ohnehin nicht gespeichert werden.</p>
+		</f:facet>
+		<p></p>
+		
+		<h:form id="eingabeMaske">
+			<p:panelGrid columns="4"
+			                 columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+			                 layout="grid"
+			                 styleClass="ui-panelgrid-blank ui-fluid"
+			                 style="border:0px none; background-color:transparent;">
+			
+			        <p:row styleClass="my-heading-row" style="font-weight: 900">
+			            Persönliche Daten
+			        </p:row>
+			
+			        <p:outputLabel for="vorname" value="Vorname:"/>
+			        <p:inputText id="vorname" value="#{meldenController.vorname}" required="true" 
+			        		label="Vorname" placeholder="Max"
+			        		validatorMessage="Beim Vornamen sind nur Buchstaben zulässig.">
+			        <f:validateRegex pattern="^[\p{L}]+$"/>
+					</p:inputText>
+			
+			        <p:outputLabel for="nachname" value="Nachname:"/>
+			        <p:inputText id="nachname" value="#{meldenController.nachname}" required="true" 
+			        		label="Nachname" placeholder="Mustermann"
+			        		validatorMessage="Beim Nachnamen sind nur Buchstaben zulässig.">
+					<f:validateRegex pattern="^[\p{L}]+$"/>
+					</p:inputText>
+			
+			        <p:outputLabel for="telefonnummer" value="Telefonnummer:"/>
+					<p:inputText id="telefonnummer" value="#{meldenController.telefonnummer}" required="false"
+				             label="Telefonnummer" placeholder="Format: +49170123456 - ohne Leerzeichen"
+				             validatorMessage="Die Telefonnummer muss dem Format: '+49170123456 - ohne Leerzeichen' entsprechen und mind. 10 / max. 15 Zeichen besitzen.">
+				    <f:validateRegex pattern="^\+[1-9]\d{9,14}$"/>
+					</p:inputText>
+			
+			        <p:row styleClass="my-heading-row" style="font-weight: 900">
+			            Angaben zum Geisternetz
+			        </p:row>
+			
+					<p:row styleClass="my-heading-row">
+			            GPS-Koordinaten in dezimaler Notation:
+			        </p:row>
+				        <p:outputLabel for="breitengrad" value="Breitengrad °(N)"/>
+				        <p:inputText id="breitengrad" 
+				        			 value="#{meldenController.breitengrad}" 
+				        			 required="true"
+				        			 label="Breitengrad" 
+				        			 placeholder="z.B. -48.876667">
+				       	<f:converter converterId="breitengradConverter"/>
+				       	</p:inputText>
+				
+				        <p:outputLabel for="laengengrad" value="Laengengrad °(E)"/>
+				        <p:inputText id="laengengrad" 
+				        			 value="#{meldenController.laengengrad}" 
+				        			 required="true" 
+				        			 label="Laengengrad"
+				        			 placeholder="z.B. -123.393333">			        			 
+				        <f:converter converterId="laengengradConverter"/>
+				        </p:inputText>
+			       
+
+			
+			        <p:outputLabel for="groesse" value="Geschätzte Größe in m²"/>
+					<p:inputText id="groesse"
+					             value="#{meldenController.groesse}"
+					             required="true"
+					             label="Groesse" 
+					             validatorMessage="Bitte bei Größe des Netzes eine Ganzzahl zwischen 1 und 100000 eingeben."
+					             converterMessage="Bitte bei Größe des Netzes eine Ganzzahl zwischen 1 und 100000 eingeben.">  
+					    <f:validateLongRange minimum="1" maximum="100000" />  
+					</p:inputText>
+			
+			        <p:row>
+			            <p:column styleClass="ui-grid-col-12">
+			                <p>*<span class="unterstrichen">Diese Felder sind Pflichtfelder!</span></p>
+			                <p:messages autoUpdate="true" showDetail="true" showSummary="false" />
+			            </p:column>
+			        </p:row>
+			
+			        <p:row>
+			            <p:column styleClass="ui-grid-col-12">
+			                 <p:commandButton value="Absenden" action="#{meldenController.hinzufuegen()}" update="netzTabelle eingabeMaske" icon="pi pi-check" style="width: auto" />
+			            </p:column>
+			        </p:row>
+			    </p:panelGrid>
+   		</h:form>
+		
+	</p:panel>
+
+	<h2>Geisternetz Übersicht</h2>
+
+    <h:form id="netzTabelle">
+	    <p:dataTable var="netz" value="#{geisternetzGesamtListe.liste}" 
+	                 widgetVar="netzTable"
+	                 paginator="true" rows="10" 
+	                 resizableColumns="true" 
+	                 styleClass="customTable"
+	                 sortMode="multiple"
+	                 tableStyle="width: 100%; border: 1px solid #ccc;"
+	                 lazy="false">
+	        
+	        <!-- Spalten mit Sortieroptionen -->
+	        <p:column headerText="LfdNr">
+	        	<h:outputText value="#{netz.lfdNr}" />
+	        </p:column>
+	        
+	        <p:column headerText="Breitengrad">
+	            <h:outputText value="#{netz.breitengrad}" />
+	        </p:column>
+	        
+	        <p:column headerText="Längengrad">
+	            <h:outputText value="#{netz.laengengrad}" />
+	        </p:column>
+	        
+	        <p:column headerText="Größe" sortBy="#{netz.groesse}">
+	            <h:outputText value="#{netz.groesse}" />
+	        </p:column>
+	        
+	        <p:column headerText="Status" sortBy="#{netz.status}">
+	            <h:outputText value="#{netz.status}" />
+	        </p:column>
+	        
+	        <!-- Facette für eine Auflistung der Anzahl von Netzen -->
+	        <f:facet name="footer">
+	            <h:outputText value="Geisternetze - Total: #{fn:length(geisternetzGesamtListe.liste)}" />
+	        </f:facet>
+	    </p:dataTable>
+    </h:form>
+	<footer class="seiten-footer">
+    <p>Hinweis: Diese Seite ist ein Entwurf und dient nur Demonstrationszwecken.</p>
+	</footer>
+</h:body>
+</html>
