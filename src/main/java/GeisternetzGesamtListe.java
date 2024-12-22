@@ -33,7 +33,7 @@ public class GeisternetzGesamtListe implements Serializable {
 		liste.get(index).setStatus(status);
 	}
 	
-	public void bergendePersonEintragen(int lfdNr, Person bergendePerson ) {
+	public void bergendePersonEintragen(int lfdNr, BergendePerson bergendePerson ) {
 		int index = lfdNr -1;
 		liste.get(index).setBergendePerson(bergendePerson);
 		liste.get(index).setStatus(Status.BEVORSTEHEND);

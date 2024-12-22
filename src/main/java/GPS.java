@@ -4,15 +4,15 @@ public class GPS implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	// Eigenschaften von Geisternetzen
-	private double breitengrad;
-	private double laengengrad;
+	private Double breitengrad;
+	private Double laengengrad;
 
 	//	Leerer Public Konstruktor
 	public GPS() {
 	}
 	
 	// Konstruktor mit breitengrad und laengengrad
-	public GPS(double breitengrad, double laengengrad) {
+	public GPS(Double breitengrad, Double laengengrad) {
 		this.breitengrad = breitengrad;
 		this.laengengrad = laengengrad;
 	}

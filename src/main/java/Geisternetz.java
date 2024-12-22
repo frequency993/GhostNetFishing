@@ -9,7 +9,7 @@ public class Geisternetz implements Serializable {
 	private int lfdNr;
 	private MeldendePerson meldendePerson;
 	private Person verschollenMeldendePerson;
-	private Person bergendePerson;
+	private BergendePerson bergendePerson;
 	private Status status;
 	
 //	Leerer Public Konstruktor
@@ -68,11 +68,11 @@ public class Geisternetz implements Serializable {
 		this.verschollenMeldendePerson = verschollenMeldendePerson;
 	}
 
-	public Person getBergendePerson() {
+	public BergendePerson getBergendePerson() {
 		return bergendePerson;
 	}
 
-	public void setBergendePerson(Person bergendePerson) {
+	public void setBergendePerson(BergendePerson bergendePerson) {
 		this.bergendePerson = bergendePerson;
 	}
 
