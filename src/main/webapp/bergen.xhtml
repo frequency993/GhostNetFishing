@@ -73,7 +73,7 @@
 			        </p:row>
 				        <p:outputLabel for="breitengrad" value="Breitengrad °(N)"/>
 				        <p:inputText id="breitengrad" 
-				        			 value="#{bergenController.ausgewaeltesNetz.breitengrad}" 
+				        			 value="#{bergenController.ausgewaeltesNetz.gps.breitengrad}" 
 				        			 required="true" 
 				        			 label="Breitengrad" 
 				        			 readonly = "true"
@@ -81,7 +81,7 @@
 				
 				        <p:outputLabel for="laengengrad" value="Laengengrad °(E)"/>
 				        <p:inputText id="laengengrad" 
-				        			 value="#{bergenController.ausgewaeltesNetz.laengengrad}" 
+				        			 value="#{bergenController.ausgewaeltesNetz.gps.laengengrad}" 
 				        			 required="true" 
 				        			 label="Laengengrad"
 				        			 readonly = "true"
@@ -131,11 +131,11 @@
 	        </p:column>
 	        
 	        <p:column headerText="Breitengrad">
-	            <h:outputText value="#{netz.breitengrad}" />
+	            <h:outputText value="#{netz.gps.breitengrad}" />
 	        </p:column>
 	        
 	        <p:column headerText="Längengrad">
-	            <h:outputText value="#{netz.laengengrad}" />
+	            <h:outputText value="#{netz.gps.laengengrad}" />
 	        </p:column>
 	        
 	        <p:column headerText="Größe" sortBy="#{netz.groesse}">

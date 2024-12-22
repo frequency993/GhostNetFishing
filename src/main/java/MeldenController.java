@@ -84,7 +84,7 @@ public class MeldenController implements Serializable {
 
 	    if (!eingabeWert.matches("^-?\\d*\\.\\d{3,}$")) {
 	        throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-	            "Längengrad muss eine Dezimalzahl mit mindestens 3 Nachkommastellen sein.", null));
+	            "Breitengrad muss eine Dezimalzahl mit mindestens 3 Nachkommastellen sein.", null));
 	    }
 	    
 	    // Value in double casten
@@ -121,6 +121,14 @@ public class MeldenController implements Serializable {
 		this.telefonnummer = telefonnummer;
 	}
 
+	public Integer getGroesse() {
+		return groesse;
+	}
+
+	public void setGroesse(Integer groesse) {
+		this.groesse = groesse;
+	}
+
 	public Double getBreitengrad() {
 		return breitengrad;
 	}
@@ -135,14 +143,6 @@ public class MeldenController implements Serializable {
 
 	public void setLaengengrad(Double laengengrad) {
 		this.laengengrad = laengengrad;
-	}
-
-	public Integer getGroesse() {
-		return groesse;
-	}
-
-	public void setGroesse(Integer groesse) {
-		this.groesse = groesse;
 	}
 	
 }
