@@ -77,8 +77,9 @@
 				        			 value="#{meldenController.breitengrad}" 
 				        			 required="true"
 				        			 label="Breitengrad" 
-				        			 placeholder="z.B. -48.876667">
-				       	<f:converter converterId="breitengradConverter"/>
+				        			 placeholder="z.B. -48.876667"
+				        			 converter="DoubleConverter"
+				        			 validator="#{meldenController.validateBreitengrad}">
 				       	</p:inputText>
 				
 				        <p:outputLabel for="laengengrad" value="Laengengrad °(E)"/>
@@ -86,8 +87,9 @@
 				        			 value="#{meldenController.laengengrad}" 
 				        			 required="true" 
 				        			 label="Laengengrad"
-				        			 placeholder="z.B. -123.393333">			        			 
-				        <f:converter converterId="laengengradConverter"/>
+				        			 placeholder="z.B. -123.393333"
+				        			 converter="DoubleConverter"
+				        			 validator="#{meldenController.validateLaengengrad}">	      			 
 				        </p:inputText>
 			       
 
