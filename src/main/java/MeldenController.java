@@ -14,12 +14,8 @@ public class MeldenController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	// Deklarationen
-	private String vorname;
-	private String nachname ;
-	private String telefonnummer;
-	private Double breitengrad;
-	private Double laengengrad;
-	private Integer groesse;
+	private Geisternetz geisternetz = new Geisternetz();
+	private MeldendePerson meldendePerson = new MeldendePerson();
 	
 	@Inject
 	GeisternetzGesamtListe geisternetzGesamtListe;
@@ -29,29 +25,22 @@ public class MeldenController implements Serializable {
 	}
 	
 	public void hinzufuegen() {
-		boolean tmpIstAnonym = false;
-	    if (telefonnummer == null) {
-	        vorname = "Anonym";
-	        nachname = "Anonym";
-	        telefonnummer = "Anonym";
-	        tmpIstAnonym = true;
-	    }
-	    
-		MeldendePerson tempMelder = new MeldendePerson(vorname, nachname, telefonnummer,tmpIstAnonym);
+	    if (meldendePerson.getTelefonnummer() == null) {
+		        meldendePerson.setIstAnonym(true);
+		} else {
+			meldendePerson.setIstAnonym(false);
+		}
 		
 		int tempLfdNr = geisternetzGesamtListe.naechsteLfdNr();
-		Geisternetz tempNetz = new Geisternetz(tempLfdNr, breitengrad, laengengrad, groesse, Status.GEMELDET, tempMelder);
-		geisternetzGesamtListe.netzHinzufuegen(tempNetz);
-		felderLeeren();
-	}
-	
-	public void felderLeeren() {
-		this.vorname = null;
-		this.nachname = null;
-		this.telefonnummer = null;
-		this.breitengrad = null;
-		this.laengengrad = null;
-		this.groesse = null;
+		geisternetz.setLfdNr(tempLfdNr);
+		geisternetz.setStatus(Status.GEMELDET);
+		geisternetz.setMeldendePerson(meldendePerson);
+
+		geisternetzGesamtListe.netzHinzufuegen(geisternetz);
+		
+		//Objekte zurücksetzen und dadurch auch Felder leeren.
+		geisternetz = new Geisternetz();
+		meldendePerson = new MeldendePerson();
 	}
 	
 	// Eigener Laengengrad-Validator
@@ -97,52 +86,28 @@ public class MeldenController implements Serializable {
 	}
 
 	// Getter und Setter
-	public String getVorname() {
-		return vorname;
+	public Geisternetz getGeisternetz() {
+		return geisternetz;
 	}
 
-	public void setVorname(String vorname) {
-		this.vorname = vorname;
+	public void setGeisternetz(Geisternetz geisternetz) {
+		this.geisternetz = geisternetz;
 	}
 
-	public String getNachname() {
-		return nachname;
+	public MeldendePerson getMeldendePerson() {
+		return meldendePerson;
 	}
 
-	public void setNachname(String nachname) {
-		this.nachname = nachname;
+	public void setMeldendePerson(MeldendePerson meldendePerson) {
+		this.meldendePerson = meldendePerson;
 	}
 
-	public String getTelefonnummer() {
-		return telefonnummer;
+	public GeisternetzGesamtListe getGeisternetzGesamtListe() {
+		return geisternetzGesamtListe;
 	}
 
-	public void setTelefonnummer(String telefonnummer) {
-		this.telefonnummer = telefonnummer;
-	}
-
-	public Integer getGroesse() {
-		return groesse;
-	}
-
-	public void setGroesse(Integer groesse) {
-		this.groesse = groesse;
-	}
-
-	public Double getBreitengrad() {
-		return breitengrad;
-	}
-
-	public void setBreitengrad(Double breitengrad) {
-		this.breitengrad = breitengrad;
-	}
-
-	public Double getLaengengrad() {
-		return laengengrad;
-	}
-
-	public void setLaengengrad(Double laengengrad) {
-		this.laengengrad = laengengrad;
+	public void setGeisternetzGesamtListe(GeisternetzGesamtListe geisternetzGesamtListe) {
+		this.geisternetzGesamtListe = geisternetzGesamtListe;
 	}
 	
 }

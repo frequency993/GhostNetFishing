@@ -29,7 +29,7 @@
 	<p:panel>
 		<f:facet name="header">
 			<p>Hier kannst du von dir festgestellte Geisternetze melden, sodass Freiwillige es lokalisieren und bergen können.</p>
-			<p>Gerne kannst du dies auch anonym tun, lasse hierzu das Feld "Telefonnummer" einfach frei. Vorname und Name kannst du in diesem Fall frei wählen, da sie ohnehin nicht gespeichert werden.</p>
+			<p>Gerne kannst du dies auch anonym tun, lasse hierzu das Feld "Telefonnummer" einfach frei. Vorname und Name kannst du in diesem Fall frei wählen.</p>
 		</f:facet>
 		<p></p>
 		
@@ -45,21 +45,21 @@
 			        </p:row>
 			
 			        <p:outputLabel for="vorname" value="Vorname:"/>
-			        <p:inputText id="vorname" value="#{meldenController.vorname}" required="true" 
+			        <p:inputText id="vorname" value="#{meldenController.meldendePerson.vorname}" required="true" 
 			        		label="Vorname" placeholder="Max"
 			        		validatorMessage="Beim Vornamen sind nur Buchstaben zulässig.">
 			        <f:validateRegex pattern="^[\p{L}]+$"/>
 					</p:inputText>
 			
 			        <p:outputLabel for="nachname" value="Nachname:"/>
-			        <p:inputText id="nachname" value="#{meldenController.nachname}" required="true" 
+			        <p:inputText id="nachname" value="#{meldenController.meldendePerson.nachname}" required="true" 
 			        		label="Nachname" placeholder="Mustermann"
 			        		validatorMessage="Beim Nachnamen sind nur Buchstaben zulässig.">
 					<f:validateRegex pattern="^[\p{L}]+$"/>
 					</p:inputText>
 			
 			        <p:outputLabel for="telefonnummer" value="Telefonnummer:"/>
-					<p:inputText id="telefonnummer" value="#{meldenController.telefonnummer}" required="false"
+					<p:inputText id="telefonnummer" value="#{meldenController.meldendePerson.telefonnummer}" required="false"
 				             label="Telefonnummer" placeholder="Format: +49170123456 - ohne Leerzeichen"
 				             validatorMessage="Die Telefonnummer muss dem Format: '+49170123456 - ohne Leerzeichen' entsprechen und mind. 10 / max. 15 Zeichen besitzen.">
 				    <f:validateRegex pattern="^\+[1-9]\d{9,14}$"/>
@@ -74,7 +74,7 @@
 			        </p:row>
 				        <p:outputLabel for="breitengrad" value="Breitengrad °(N)"/>
 				        <p:inputText id="breitengrad" 
-				        			 value="#{meldenController.breitengrad}" 
+				        			 value="#{meldenController.geisternetz.gps.breitengrad}" 
 				        			 required="true"
 				        			 label="Breitengrad" 
 				        			 placeholder="z.B. -48.876667"
@@ -84,7 +84,7 @@
 				
 				        <p:outputLabel for="laengengrad" value="Laengengrad °(E)"/>
 				        <p:inputText id="laengengrad" 
-				        			 value="#{meldenController.laengengrad}" 
+				        			 value="#{meldenController.geisternetz.gps.laengengrad}" 
 				        			 required="true" 
 				        			 label="Laengengrad"
 				        			 placeholder="z.B. -123.393333"
@@ -96,7 +96,7 @@
 			
 			        <p:outputLabel for="groesse" value="Geschätzte Größe in m²"/>
 					<p:inputText id="groesse"
-					             value="#{meldenController.groesse}"
+					             value="#{meldenController.geisternetz.groesse}"
 					             required="true"
 					             label="Groesse" 
 					             validatorMessage="Bitte bei Größe des Netzes eine Ganzzahl zwischen 1 und 100000 eingeben."
@@ -113,7 +113,7 @@
 			
 			        <p:row>
 			            <p:column styleClass="ui-grid-col-12">
-			                 <p:commandButton value="Absenden" action="#{meldenController.hinzufuegen()}" update="netzTabelle eingabeMaske" icon="pi pi-check" style="width: auto" />
+			                 <p:commandButton value="Absenden" action="#{meldenController.hinzufuegen}" update="netzTabelle eingabeMaske" icon="pi pi-check" style="width: auto" />
 			            </p:column>
 			        </p:row>
 			    </p:panelGrid>

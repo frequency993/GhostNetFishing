@@ -1,7 +1,14 @@
 import java.io.Serializable;
+import jakarta.persistence.*;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED) // Oberklasse und Unterklassen haben eigene Tabellen und werden über Schlüssel gejoined.
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    private int id; //technische ID für die Datenbank
 	
 	// Eigenschaften von Personen
 	private String vorname;
@@ -11,8 +18,8 @@ public class Person implements Serializable {
 	// Leerer Public Konstruktor
 	public Person() {
 	}
-	
-	// Konstruktor mit Attributen
+
+	// Konstruktor mit Parametern, aktuell genutzt von BergendePerson
 	public Person(String vorname, String nachname, String telefonnummer) {
 		this.vorname = vorname;
 		this.nachname = nachname;
@@ -41,5 +48,13 @@ public class Person implements Serializable {
 
 	public void setTelefonnummer(String telefonnummer) {
 		this.telefonnummer = telefonnummer;
-	}	
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 }

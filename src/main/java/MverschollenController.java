@@ -10,10 +10,8 @@ public class MverschollenController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	// Deklarationen
-	private String vorname;
-	private String nachname ;
-	private String telefonnummer;
-	private Geisternetz ausgewaeltesNetz;
+	private MeldendePerson verschollenMeldendePerson = new MeldendePerson();
+	private Geisternetz ausgewaeltesNetz = new Geisternetz();
 	
 	@Inject
 	GeisternetzGesamtListe geisternetzGesamtListe;
@@ -23,45 +21,32 @@ public class MverschollenController implements Serializable {
 	}
 	
 	public void alsVerschollenMelden() {
-		Person tmpVerschollenMeldendePerson = new Person(vorname, nachname,telefonnummer);
-		int tmpLfdNr = ausgewaeltesNetz.getLfdNr();
-		geisternetzGesamtListe.statusAendern(tmpLfdNr, Status.VERSCHOLLEN, tmpVerschollenMeldendePerson);
+		geisternetzGesamtListe.verschollenEintragen(ausgewaeltesNetz, verschollenMeldendePerson);
+		
+	    verschollenMeldendePerson = new MeldendePerson();
+		ausgewaeltesNetz = new Geisternetz();
 	}
 	
-// Danach die Felder wieder leeren
-	public void felderLeeren() {
-		this.vorname = null;
-		this.nachname = null;
-		this.telefonnummer = null;
-	}
-
-// Getter und Setter
-	public String getVorname() {
-		return vorname;
-	}
-
-	public void setVorname(String vorname) {
-		this.vorname = vorname;
-	}
-
-	public String getNachname() {
-		return nachname;
-	}
-
-	public void setNachname(String nachname) {
-		this.nachname = nachname;
-	}
-
-	public String getTelefonnummer() {
-		return telefonnummer;
-	}
-
-	public void setTelefonnummer(String telefonnummer) {
-		this.telefonnummer = telefonnummer;
-	}
+	// Getter und Setter
 
 	public Geisternetz getAusgewaeltesNetz() {
 		return ausgewaeltesNetz;
+	}
+
+	public Person getVerschollenMeldendePerson() {
+		return verschollenMeldendePerson;
+	}
+
+	public void setVerschollenMeldendePerson(MeldendePerson verschollenMeldendePerson) {
+		this.verschollenMeldendePerson = verschollenMeldendePerson;
+	}
+
+	public GeisternetzGesamtListe getGeisternetzGesamtListe() {
+		return geisternetzGesamtListe;
+	}
+
+	public void setGeisternetzGesamtListe(GeisternetzGesamtListe geisternetzGesamtListe) {
+		this.geisternetzGesamtListe = geisternetzGesamtListe;
 	}
 
 	public void setAusgewaeltesNetz(Geisternetz ausgewaeltesNetz) {

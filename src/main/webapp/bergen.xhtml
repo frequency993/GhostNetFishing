@@ -54,7 +54,7 @@
 			        <p:inputText id="nachname" value="#{bergenController.bergendePerson.nachname}" required="true" label="Nachname" />
 			
 			        <p:outputLabel for="telefonnummer" value="Telefonnummer:"/>
-			        <p:inputText id="telefonnummer" value="#{bergenController.bergendePerson.telefonnummer}" required="false" label="telefonnummer" />
+			        <p:inputText id="telefonnummer" value="#{bergenController.bergendePerson.telefonnummer}" required="true" label="telefonnummer" />
 			
 			        <p:row styleClass="my-heading-row" style="font-weight: 900">
 			            Ausgewähltes Geisternetz
@@ -147,7 +147,7 @@
 	        </p:column>
 	        
 	        <p:column headerText="Bergende Person">
-	            <h:outputText value="#{netz.bergendePerson != null ? 
+	             <h:outputText value="#{netz.bergendePerson != null ? 
        				 netz.bergendePerson.vorname.concat(' ').concat(netz.bergendePerson.nachname).concat(', ').concat(netz.bergendePerson.telefonnummer) : 'Noch niemand eingetragen.'}" />
 	        </p:column>
 	        

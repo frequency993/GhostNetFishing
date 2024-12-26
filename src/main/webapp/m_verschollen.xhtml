@@ -47,21 +47,21 @@
 			        </p:row>
 			
 			        <p:outputLabel for="vorname" value="Vorname:"/>
-			        <p:inputText id="vorname" value="#{mverschollenController.vorname}" required="true" 
+			        <p:inputText id="vorname" value="#{mverschollenController.verschollenMeldendePerson.vorname}" required="true" 
 			        		label="Vorname" placeholder="Max"
 			        		validatorMessage="Beim Vornamen sind nur Buchstaben zulässig.">
 			        <f:validateRegex pattern="^[\p{L}]+$"/>
 					</p:inputText>
 			
 			        <p:outputLabel for="nachname" value="Nachname:"/>
-			        <p:inputText id="nachname" value="#{mverschollenController.nachname}" required="true" 
+			        <p:inputText id="nachname" value="#{mverschollenController.verschollenMeldendePerson.nachname}" required="true" 
 			        		label="Nachname" placeholder="Mustermann"
 			        		validatorMessage="Beim Nachnamen sind nur Buchstaben zulässig.">
 					<f:validateRegex pattern="^[\p{L}]+$"/>
 					</p:inputText>
 			
 			        <p:outputLabel for="telefonnummer" value="Telefonnummer:"/>
-					<p:inputText id="telefonnummer" value="#{mverschollenController.telefonnummer}" required="true"
+					<p:inputText id="telefonnummer" value="#{mverschollenController.verschollenMeldendePerson.telefonnummer}" required="true"
 				             label="Telefonnummer" placeholder="Format: +49170123456 - ohne Leerzeichen"
 				             validatorMessage="Die Telefonnummer muss dem Format: '+49170123456 - ohne Leerzeichen' entsprechen">
 				    <f:validateRegex pattern="^\+[1-9]\d{9,14}$"/>
@@ -105,7 +105,7 @@
 			         			  label="Groesse" 
 			         			  readonly = "true"
 			         			  placeholder="Bitte in der Tabelle eine Auswahl treffen."/>
-			
+
 			        <p:row>
 			            <p:column styleClass="ui-grid-col-12">
 			                <p>*<span class="unterstrichen">Diese Felder sind Pflichtfelder.</span></p>
@@ -115,7 +115,11 @@
 			
 			        <p:row>
 			            <p:column styleClass="ui-grid-col-12">
-			                 <p:commandButton value="Verschollen melden!" action="#{mverschollenController.alsVerschollenMelden}" update="netzTabelle eingabeMaske" icon="pi pi-check" style="width: auto" />
+			                 <p:commandButton value="Verschollen melden!" 
+			                 				  action="#{mverschollenController.alsVerschollenMelden}" 
+			                 				  update="netzTabelle eingabeMaske"   
+			                 				  icon="pi pi-check" 
+			                 				  style="width: auto" />
 			            </p:column>
 			        </p:row>
 			    </p:panelGrid>
@@ -126,7 +130,7 @@
 	<h2>Geisternetz Übersicht</h2>
 
     <h:form id="netzTabelle">
-	    <p:dataTable var="netz" value="#{geisternetzGesamtListe.filterListe()}" 
+	    <p:dataTable var="netz" value="#{geisternetzGesamtListe.filterListe}" 
 	                 widgetVar="netzTable"
 	                 paginator="true" rows="10" 
 	                 resizableColumns="true" 
@@ -159,8 +163,12 @@
 	       	<p:column>
 				<p:commandButton 
 									value="Auswählen" 
-									styleClass="ui-button-outlined"  
-									update="eingabeMaske">
+									styleClass="ui-button-outlined"
+									update=":eingabeMaske:laufendeNummer 
+            								:eingabeMaske:breitengrad 
+            								:eingabeMaske:laengengrad 
+            								:eingabeMaske:groesse"> 
+									
 			<!-- Wert des Netz-Objekts aus der Zeile an den Controller übergeben -->
 				<f:setPropertyActionListener value="#{netz}" target="#{mverschollenController.ausgewaeltesNetz}" />
 				</p:commandButton>
@@ -168,7 +176,7 @@
 	        
 	        <!-- Footer-Facette für eine Übersicht -->
 	        <f:facet name="footer">
-	            <h:outputText value="Geisternetze - Total: #{fn:length(geisternetzGesamtListe.filterListe())}" />
+	            <h:outputText value="Geisternetze - Total: #{fn:length(geisternetzGesamtListe.filterListe)}" />
 	        </f:facet>
 	    </p:dataTable>
     </h:form>

@@ -1,14 +1,29 @@
 import java.io.Serializable;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Geisternetz implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id; //technische ID für die Datenbank
+    
 	// Eigenschaften von Geisternetzen
-	private GPS gps;
-	private int groesse;
+    @OneToOne(cascade = CascadeType.PERSIST) //sicherstellen, dass GPS mit Geisternetz zusammen gespeichert wird
+	private GPS gps = new GPS();
+    
+	private Integer groesse;
 	private int lfdNr;
+	
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private MeldendePerson meldendePerson;
-	private Person verschollenMeldendePerson;
+
+	@OneToOne(cascade = CascadeType.MERGE)
+	private MeldendePerson verschollenMeldendePerson;
+	
+	@ManyToOne
 	private BergendePerson bergendePerson;
 	private Status status;
 	
@@ -16,16 +31,15 @@ public class Geisternetz implements Serializable {
 	public Geisternetz() {
 	}
 
-	// Konstruktor mit Parametern
-	public Geisternetz(int lfdNr, Double breitengrad, Double laengengrad, int groesse, Status status, MeldendePerson meldendePerson) {
-		this.gps = new GPS(breitengrad, laengengrad);
-		this.groesse = groesse;
-		this.status = status;
-		this.meldendePerson = meldendePerson;
-		this.lfdNr = lfdNr;
+	// Getter und Setter
+
+	public int getId() {
+		return id;
 	}
 
-	// Getter und Setter
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public int getLfdNr() {
 		return lfdNr;
@@ -35,12 +49,11 @@ public class Geisternetz implements Serializable {
 		this.lfdNr = lfdNr;
 	}
 
-
-	public int getGroesse() {
+	public Integer getGroesse() {
 		return groesse;
 	}
 
-	public void setGroesse(int groesse) {
+	public void setGroesse(Integer groesse) {
 		this.groesse = groesse;
 	}
 
@@ -65,7 +78,7 @@ public class Geisternetz implements Serializable {
 	}
 
 	public void setVerschollenMeldendePerson(Person verschollenMeldendePerson) {
-		this.verschollenMeldendePerson = verschollenMeldendePerson;
+		this.verschollenMeldendePerson = (MeldendePerson) verschollenMeldendePerson;
 	}
 
 	public BergendePerson getBergendePerson() {

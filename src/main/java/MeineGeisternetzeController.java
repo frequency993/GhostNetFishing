@@ -2,6 +2,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -13,6 +14,16 @@ public class MeineGeisternetzeController implements Serializable {
     
     @Inject
     private BergendePerson bergendePerson;
+    
+    @Inject
+	GeisternetzGesamtListe geisternetzGesamtListe;
+    
+    //Debugging
+    @PostConstruct
+	public void init() {
+		System.out.println("MeineGeisternetzeController: Id von bergendePerson: " + bergendePerson.getId());
+		System.out.println("MeineGeisternetzeController: Vorname von bergendePerson: " + bergendePerson.getVorname());
+	}
 
     /**
      * Verknüpft jedes Geisternetz mit einem Boolean-Wert (true/false).
@@ -36,7 +47,7 @@ public class MeineGeisternetzeController implements Serializable {
             // Nur wenn Checkbox = true und Status noch nicht "Geborgen"
             if (Boolean.TRUE.equals(istAusgewaehlt) 
                     && netz.getStatus() != Status.GEBORGEN) {
-                    netz.setStatus(Status.GEBORGEN);
+                    geisternetzGesamtListe.geborgenEintragen(netz);
             }
         }
         // Die Map leeren, um die Checkboxen zurückzusetzen

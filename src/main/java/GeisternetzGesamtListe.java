@@ -12,6 +12,7 @@ public class GeisternetzGesamtListe implements Serializable {
 	
 	// Eigenschaften von GeisternetzGesamtListe
 	private static GeisternetzGesamtListe instance = new GeisternetzGesamtListe();
+	private static final GeisternetzDAO dao = new GeisternetzDAO();
 	private List<Geisternetz> liste = new ArrayList<Geisternetz>();
 	
 	// Leerer Public Konstruktor
@@ -20,6 +21,8 @@ public class GeisternetzGesamtListe implements Serializable {
 	
 	public void netzHinzufuegen(Geisternetz geisternetz) {
 		liste.add(geisternetz);
+		dao.speichern(geisternetz);
+		System.out.println("GeisternetzGesamtListe: Geisternetz ID nach Speichern: " + geisternetz.getId());
 	}
 	
 	public int naechsteLfdNr() {
@@ -27,16 +30,26 @@ public class GeisternetzGesamtListe implements Serializable {
 		LfdNr = liste.size() + 1;
 		return LfdNr;
 	}
-	
-	public void statusAendern(int lfdNr, Status status, Person verschollenMeldendePerson) {
-		int index = lfdNr - 1;
-		liste.get(index).setStatus(status);
+		
+	public void verschollenEintragen(Geisternetz geisternetz, Person verschollenMeldendePerson) {
+        geisternetz.setStatus(Status.VERSCHOLLEN);
+        geisternetz.setVerschollenMeldendePerson(verschollenMeldendePerson);
+		System.out.println("GeisternetzGesamtListe: Status 'Verschollen' für Geisternetz mit ID: " + geisternetz.getId());
+		dao.updateVerschollen(geisternetz);
 	}
 	
-	public void bergendePersonEintragen(int lfdNr, BergendePerson bergendePerson ) {
+	public void bergendePersonEintragen(int lfdNr, BergendePerson bergendePerson) {
 		int index = lfdNr -1;
-		liste.get(index).setBergendePerson(bergendePerson);
-		liste.get(index).setStatus(Status.BEVORSTEHEND);
+		Geisternetz tmpNetz = liste.get(index);
+		tmpNetz.setStatus(Status.BEVORSTEHEND);
+		System.out.println("GeisternetzGesamtListe: Bergende Person: "+ bergendePerson.getVorname() + " mit der ID: " + bergendePerson.getId() + " für Geisternetz mit ID: " + tmpNetz.getId());
+		dao.updateBergendePerson(tmpNetz, bergendePerson);
+	}
+	
+	public void geborgenEintragen(Geisternetz geisternetz) {
+		geisternetz.setStatus(Status.GEBORGEN);
+		System.out.println("GeisternetzGesamtListe: Status 'geborgen' für Geisternetz mit ID: " + geisternetz.getId());
+		dao.updateGeborgen(geisternetz);
 	}
 	
 	public static GeisternetzGesamtListe getInstance() {
@@ -44,22 +57,27 @@ public class GeisternetzGesamtListe implements Serializable {
 	}
 	
 	// Gibt eine Liste von allen Netzen zurück, die der anfragenden bergenden Person zuzuordnen sind.
-	public List<Geisternetz> filterListe(Person bergendePerson) {
-	    List<Geisternetz> gefilterteListe = new ArrayList<>();
-	    
-	    for (Geisternetz netz : liste) {
-	        // Filtert Geisternetze mit Status != "Verschollen" und prüft die Zuordnung zur bergenden Person
-	        if (bergendePerson.equals(netz.getBergendePerson())) {
-	            gefilterteListe.add(netz);
+	public List<Geisternetz> filterListe(Object bergendePerson) {
+	    // Überprüfen, ob der Parameter vom Typ BergendePerson ist
+	    if (bergendePerson instanceof BergendePerson) {
+	        BergendePerson person = (BergendePerson) bergendePerson;
+	        List<Geisternetz> gefilterteListe = new ArrayList<>();
+	        
+	        for (Geisternetz netz : liste) {
+	            // Filtert Geisternetze nach der passenden bergenden Person
+	            if (person.getId() == netz.getBergendePerson().getId()) {
+	                gefilterteListe.add(netz);
+	            }
 	        }
+	        
+	        return gefilterteListe;
 	    }
-	    
-	    return gefilterteListe;
+	    // Gibt eine leere Liste zurück, wenn der Parameter nicht vom Typ BergendePerson ist
+	    return new ArrayList<>();
 	}
 	
 	// Gibt eine Liste von allen Netzen zurück, die nicht als verschollen oder bereits geborgen gemeldet sind.
-	// Gibt eine Liste von allen Netzen zurück, die nicht als verschollen oder bereits geborgen gemeldet sind.
-	public List<Geisternetz> filterListe() {
+	public List<Geisternetz> getfilterListe() {
 	    List<Geisternetz> gefilterteListe = new ArrayList<>();
 	    
 	    for (Geisternetz netz : liste) {

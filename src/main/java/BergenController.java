@@ -1,5 +1,6 @@
 import java.io.Serializable;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -22,9 +23,18 @@ public class BergenController implements Serializable {
 	public BergenController() {
 	}
 	
+	// Nur für Debugging
+	@PostConstruct
+	public void init() {
+		System.out.println("BergenController: Id von bergendePerson: " + bergendePerson.getId());
+		System.out.println("BergenController: Vorname von bergendePerson: " + bergendePerson.getVorname());
+	}
+	
 	public void alsBergendEintragen() {
 		int tmpLfdNr = ausgewaeltesNetz.getLfdNr();
+		System.out.println("BergenController: Id von bergendePerson: " + bergendePerson.getId());
 		geisternetzGesamtListe.bergendePersonEintragen(tmpLfdNr, bergendePerson);
+		ausgewaeltesNetz = new Geisternetz();
 	}
 
 	// Getter und Setter

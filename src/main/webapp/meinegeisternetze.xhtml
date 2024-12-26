@@ -34,7 +34,7 @@
 			   Klicke dann auf "<i>Als geborgen melden!</i>", um die ausgewählten Geisternetze als geborgen zu melden.</p>
 				    <!-- Button zum Melden als 'Geborgen' -->
 	    <p:commandButton value="Als geborgen melden!"
-	                     actionListener="#{meineGeisternetzeController.alsGeborgenMelden()}"
+	                     actionListener="#{meineGeisternetzeController.alsGeborgenMelden}"
 	                     update=":netzTabelle" />
 		</f:facet>
 	</p:panel>
@@ -86,7 +86,7 @@
 	            <h:outputText value="Geisternetze - Total: #{fn:length(geisternetzGesamtListe.filterListe(meineGeisternetzeController.bergendePerson))}" />
 	        </f:facet>
 	    </p:dataTable>
-</h:form>
+	</h:form>
     
 	<footer class="seiten-footer">
     <p>Hinweis: Diese Seite ist ein Entwurf und dient nur Demonstrationszwecken.</p>

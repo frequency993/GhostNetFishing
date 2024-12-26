@@ -32,22 +32,26 @@ public class LoginController implements Serializable {
 		this.bergendenListe.add(new BergendePerson("Dennis", "Schmalenberger", "+4915124052488", "tester", "tester"));
 	}	
 
-	public void validateLogin(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-		for(BergendePerson bP:bergendenListe) {
-			BergendePerson temp=new BergendePerson(this.benutzername, (String)value);
-			if(bP.equals(temp)) {
-				this.bergendePerson.setVorname(bP.getVorname());
-				this.bergendePerson.setNachname(bP.getNachname());
-				this.bergendePerson.setTelefonnummer(bP.getTelefonnummer());
-				return;
-			}
-		}
-		throw new ValidatorException(new FacesMessage("Bitte Login-Daten überprüfen!"));
-	}
 	
 	public void postValidateName(ComponentSystemEvent ev) throws AbortProcessingException {
 		UIInput temp = (UIInput)ev.getComponent();
 		this.benutzername = (String)temp.getValue();
+	}
+	
+	public void validateLogin(FacesContext context, UIComponent component, Object value) throws ValidatorException {
+		for(BergendePerson bP:bergendenListe) {
+			BergendePerson temp=new BergendePerson(this.benutzername, (String)value);
+			if(bP.equals(temp)) {
+				this.bergendePerson.setId(bP.getId());
+				this.bergendePerson.setVorname(bP.getVorname());
+				this.bergendePerson.setNachname(bP.getNachname());
+				this.bergendePerson.setTelefonnummer(bP.getTelefonnummer());
+				this.bergendePerson.setBenutzerName(bP.getBenutzerName());
+				this.bergendePerson.setPasswort(bP.getPasswort());
+				return;
+			}
+		}
+		throw new ValidatorException(new FacesMessage("Bitte Login-Daten überprüfen!"));
 	}
 
 	public String login() {

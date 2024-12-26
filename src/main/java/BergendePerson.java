@@ -2,9 +2,11 @@ import java.io.Serializable;
 
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
+import jakarta.persistence.Entity;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+@Entity
 @Named
 @SessionScoped
 public class BergendePerson extends Person implements Serializable {
@@ -13,6 +15,7 @@ public class BergendePerson extends Person implements Serializable {
 	// Eigenschaften von Personen
 	private String benutzerName;
 	private String passwort;
+	private static final BergendePersonDAO dao = new BergendePersonDAO();
 
 
 	// Leerer Public Konstruktor
@@ -24,6 +27,8 @@ public class BergendePerson extends Person implements Serializable {
 		super(vorname, nachname, telefonnummer);
 		this.benutzerName = benutzerName;
 		this.passwort = BCrypt.hashpw(passwort, BCrypt.gensalt());
+		dao.speichern(this);
+		System.out.println("BergendePerson: Person gespeichert mit Id: " + this.getId());
 	}
 	
 	// Constructor für das temporäre Objekt "Bergende Person" für die Validierung
