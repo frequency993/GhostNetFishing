@@ -65,7 +65,7 @@ public class GeisternetzGesamtListe implements Serializable {
 	        
 	        for (Geisternetz netz : liste) {
 	            // Filtert Geisternetze nach der passenden bergenden Person
-	            if (person.getId() == netz.getBergendePerson().getId()) {
+	            if (netz.getBergendePerson() != null && person.getId() == netz.getBergendePerson().getId()) {
 	                gefilterteListe.add(netz);
 	            }
 	        }

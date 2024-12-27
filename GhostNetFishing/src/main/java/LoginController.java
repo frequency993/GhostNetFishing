@@ -21,15 +21,20 @@ public class LoginController implements Serializable {
 	// Deklarationen
 	private String benutzername;
 	private String passwort;
-	private List<BergendePerson> bergendenListe;
+	private List<BergendePerson> bergendenListe = new ArrayList<BergendePerson>();
+	private static final BergendePersonDAO dao = new BergendePersonDAO();
     
 	@Inject
     private BergendePerson bergendePerson; // Injektion der zentralen Bean
 	
 	// Leerer Konstruktor
 	public LoginController() {
-		this.bergendenListe = new ArrayList<BergendePerson>();
-		this.bergendenListe.add(new BergendePerson("Dennis", "Schmalenberger", "+4915124052488", "tester", "tester"));
+		bergendenListe = dao.laden();
+		if (bergendenListe.isEmpty()) {
+			this.bergendenListe.add(new BergendePerson("Christoph", "Kolumbus", "+3911111111111", "a", "a"));
+			this.bergendenListe.add(new BergendePerson("Ferdinand", "Magellan", "+3512222222222", "b", "b"));
+			this.bergendenListe.add(new BergendePerson("James", "Cook", "+4433333333333", "c", "c"));
+		}
 	}	
 
 	

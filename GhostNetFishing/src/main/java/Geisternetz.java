@@ -11,7 +11,7 @@ public class Geisternetz implements Serializable {
     private int id; //technische ID für die Datenbank
     
 	// Eigenschaften von Geisternetzen
-    @OneToOne(cascade = CascadeType.PERSIST) //sicherstellen, dass GPS mit Geisternetz zusammen gespeichert wird
+    @OneToOne(cascade = CascadeType.PERSIST)
 	private GPS gps = new GPS();
     
 	private Integer groesse;
