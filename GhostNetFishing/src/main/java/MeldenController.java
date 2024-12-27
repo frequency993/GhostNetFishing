@@ -25,13 +25,13 @@ public class MeldenController implements Serializable {
 	}
 	
 	public void hinzufuegen() {
-	    if (meldendePerson.getTelefonnummer() == null) {
+	    if (meldendePerson.getTelefonnummer() == "") {
 		        meldendePerson.setIstAnonym(true);
 		} else {
 			meldendePerson.setIstAnonym(false);
 		}
 		
-		int tempLfdNr = geisternetzGesamtListe.naechsteLfdNr();
+		Integer tempLfdNr = geisternetzGesamtListe.naechsteLfdNr();
 		geisternetz.setLfdNr(tempLfdNr);
 		geisternetz.setStatus(Status.GEMELDET);
 		geisternetz.setMeldendePerson(meldendePerson);

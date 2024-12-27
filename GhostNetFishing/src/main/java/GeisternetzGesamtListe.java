@@ -2,6 +2,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
 
@@ -19,14 +20,20 @@ public class GeisternetzGesamtListe implements Serializable {
 	public GeisternetzGesamtListe() {
 	}	
 	
+	@PostConstruct // Nicht im Konstruktur, da die Initialisierung der Liste sonst nicht funktioniert 
+	public void init() {
+		liste = dao.getAlleGeisternetze();
+		System.out.println("GeisternetzGesamtListe: Liste geladen");
+	}
+	
 	public void netzHinzufuegen(Geisternetz geisternetz) {
 		liste.add(geisternetz);
 		dao.speichern(geisternetz);
 		System.out.println("GeisternetzGesamtListe: Geisternetz ID nach Speichern: " + geisternetz.getId());
 	}
 	
-	public int naechsteLfdNr() {
-		int LfdNr;
+	public Integer naechsteLfdNr() {
+		Integer LfdNr;
 		LfdNr = liste.size() + 1;
 		return LfdNr;
 	}
@@ -34,22 +41,20 @@ public class GeisternetzGesamtListe implements Serializable {
 	public void verschollenEintragen(Geisternetz geisternetz, Person verschollenMeldendePerson) {
         geisternetz.setStatus(Status.VERSCHOLLEN);
         geisternetz.setVerschollenMeldendePerson(verschollenMeldendePerson);
-		System.out.println("GeisternetzGesamtListe: Status 'Verschollen' für Geisternetz mit ID: " + geisternetz.getId());
-		dao.updateVerschollen(geisternetz);
+		System.out.println("GeisternetzGesamtListe: Verschollen meldende Person: " +verschollenMeldendePerson.getVorname()+" und Status: 'Verschollen' für Geisternetz mit ID: " + geisternetz.getId());
+		dao.update(geisternetz);
 	}
 	
-	public void bergendePersonEintragen(int lfdNr, BergendePerson bergendePerson) {
-		int index = lfdNr -1;
-		Geisternetz tmpNetz = liste.get(index);
-		tmpNetz.setStatus(Status.BEVORSTEHEND);
-		System.out.println("GeisternetzGesamtListe: Bergende Person: "+ bergendePerson.getVorname() + " mit der ID: " + bergendePerson.getId() + " für Geisternetz mit ID: " + tmpNetz.getId());
-		dao.updateBergendePerson(tmpNetz, bergendePerson);
+	public void bergendePersonEintragen(Geisternetz geisternetz, BergendePerson bergendePerson) {
+		geisternetz.setStatus(Status.BEVORSTEHEND);
+		System.out.println("GeisternetzGesamtListe: Bergende Person: "+ bergendePerson.getVorname() + " mit der ID: " + bergendePerson.getId() + " für Geisternetz mit ID: " + geisternetz.getId());
+		dao.updateBergendePerson(geisternetz, bergendePerson);
 	}
 	
 	public void geborgenEintragen(Geisternetz geisternetz) {
 		geisternetz.setStatus(Status.GEBORGEN);
 		System.out.println("GeisternetzGesamtListe: Status 'geborgen' für Geisternetz mit ID: " + geisternetz.getId());
-		dao.updateGeborgen(geisternetz);
+		dao.update(geisternetz);
 	}
 	
 	public static GeisternetzGesamtListe getInstance() {

@@ -23,7 +23,18 @@ public class BverschollenController implements Serializable {
 	}
 	
 	public void alsVerschollenMelden() {
-		geisternetzGesamtListe.verschollenEintragen(ausgewaeltesNetz, bergendePerson);
+		// Gibt man die ursprüngliche bergendePerson mit Id weiter, kommt JPA beim Merge durcheinander und speichert Null.
+		// Deshalb wird eine neue Person erstellt und nur Vorname, Nachname und Telefonnummer übernommen.
+		Person verschollenMeldendePerson = new Person(); 
+		verschollenMeldendePerson.setVorname(bergendePerson.getVorname());
+		verschollenMeldendePerson.setNachname(bergendePerson.getNachname());
+		verschollenMeldendePerson.setTelefonnummer(bergendePerson.getTelefonnummer());
+		
+		geisternetzGesamtListe.verschollenEintragen(ausgewaeltesNetz, verschollenMeldendePerson);
+		System.out.println("BverschollenController: Verschollen meldente Person: " + bergendePerson.getVorname() + " mit der ID: "
+				+ bergendePerson.getId() + " für Geisternetz mit ID: " + ausgewaeltesNetz.getId());
+		
+		ausgewaeltesNetz = new Geisternetz();
 	}
 
 	// Getter und Setter

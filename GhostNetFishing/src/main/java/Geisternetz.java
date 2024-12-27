@@ -15,22 +15,22 @@ public class Geisternetz implements Serializable {
 	private GPS gps = new GPS();
     
 	private Integer groesse;
-	private int lfdNr;
+	private Integer lfdNr;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private MeldendePerson meldendePerson;
 
-	@OneToOne(cascade = CascadeType.MERGE)
-	private MeldendePerson verschollenMeldendePerson;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Person verschollenMeldendePerson;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private BergendePerson bergendePerson;
 	private Status status;
 	
 //	Leerer Public Konstruktor
 	public Geisternetz() {
 	}
-
+	
 	// Getter und Setter
 
 	public int getId() {
@@ -41,11 +41,11 @@ public class Geisternetz implements Serializable {
 		this.id = id;
 	}
 
-	public int getLfdNr() {
+	public Integer getLfdNr() {
 		return lfdNr;
 	}
 
-	public void setLfdNr(int lfdNr) {
+	public void setLfdNr(Integer lfdNr) {
 		this.lfdNr = lfdNr;
 	}
 
@@ -78,7 +78,7 @@ public class Geisternetz implements Serializable {
 	}
 
 	public void setVerschollenMeldendePerson(Person verschollenMeldendePerson) {
-		this.verschollenMeldendePerson = (MeldendePerson) verschollenMeldendePerson;
+		this.verschollenMeldendePerson = verschollenMeldendePerson;
 	}
 
 	public BergendePerson getBergendePerson() {

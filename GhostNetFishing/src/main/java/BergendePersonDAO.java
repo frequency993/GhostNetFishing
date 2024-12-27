@@ -17,16 +17,15 @@ public class BergendePersonDAO {
         em.persist(bergendePerson);
         System.out.println("BergendePersonDAO: Person gespeichert mit ID: " + bergendePerson.getId() + " gespeichert");
         t.commit();
+        em.close();
 	}
 	
 	public List<BergendePerson> laden() {
 		EntityManager em = emf.createEntityManager();
-		try {
-			TypedQuery<BergendePerson> q = em.createQuery("select b from BergendePerson b", BergendePerson.class);
-			List<BergendePerson> alleBergendePersonen = q.getResultList();
-			return alleBergendePersonen;
-		} finally {
-			em.close();
-		}
+		TypedQuery<BergendePerson> q = em.createQuery("select b from BergendePerson b", BergendePerson.class);
+		List<BergendePerson> alleBergendePersonen = q.getResultList();
+		em.close();
+		return alleBergendePersonen;
 	}
+	
 }

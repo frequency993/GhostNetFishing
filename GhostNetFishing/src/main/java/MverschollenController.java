@@ -10,8 +10,8 @@ public class MverschollenController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	// Deklarationen
-	private MeldendePerson verschollenMeldendePerson = new MeldendePerson();
-	private Geisternetz ausgewaeltesNetz = new Geisternetz();
+	private Person verschollenMeldendePerson = new Person();
+	private Geisternetz ausgewaeltesNetz;
 	
 	@Inject
 	GeisternetzGesamtListe geisternetzGesamtListe;
@@ -37,7 +37,7 @@ public class MverschollenController implements Serializable {
 		return verschollenMeldendePerson;
 	}
 
-	public void setVerschollenMeldendePerson(MeldendePerson verschollenMeldendePerson) {
+	public void setVerschollenMeldendePerson(Person verschollenMeldendePerson) {
 		this.verschollenMeldendePerson = verschollenMeldendePerson;
 	}
 

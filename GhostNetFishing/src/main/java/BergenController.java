@@ -31,9 +31,8 @@ public class BergenController implements Serializable {
 	}
 	
 	public void alsBergendEintragen() {
-		int tmpLfdNr = ausgewaeltesNetz.getLfdNr();
+		geisternetzGesamtListe.bergendePersonEintragen(ausgewaeltesNetz, bergendePerson);
 		System.out.println("BergenController: Id von bergendePerson: " + bergendePerson.getId());
-		geisternetzGesamtListe.bergendePersonEintragen(tmpLfdNr, bergendePerson);
 		ausgewaeltesNetz = new Geisternetz();
 	}
 
