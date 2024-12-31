@@ -22,12 +22,13 @@ public class BergendePerson extends Person implements Serializable {
 	public BergendePerson() {
 	}
 	
-	// Passwörter werden mittels BCrypt gehashed und gesaltet!
 	public BergendePerson(String vorname, String nachname, String telefonnummer, String benutzerName, String passwort) {
 		super(vorname, nachname, telefonnummer);
 		this.benutzerName = benutzerName;
+		//Passwort wird gehashed und gesalted, um es zu speichern
 		this.passwort = BCrypt.hashpw(passwort, BCrypt.gensalt());
 		dao.speichern(this);
+		// Nur für Debugging
 		System.out.println("BergendePerson: Person gespeichert mit Id: " + this.getId());
 	}
 	
@@ -45,6 +46,7 @@ public class BergendePerson extends Person implements Serializable {
 			// Vergleich der Benutzernamen
 			 if (b.getBenutzerName().equals(this.benutzerName)) {
 	                // Nutzt BCrypt um das gespeicherte mit dem angegebenen Passwort zu vergleichen und gibt den boolean zurück.
+				 	// Direkter Vergleich nicht möglich, da das Passwort gehashed und gesalted wurde!
 	                return BCrypt.checkpw(b.getPasswort(), this.passwort);
 	            }
 	        }

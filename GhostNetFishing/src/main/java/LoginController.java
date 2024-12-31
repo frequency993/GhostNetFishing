@@ -23,13 +23,16 @@ public class LoginController implements Serializable {
 	private String passwort;
 	private List<BergendePerson> bergendenListe = new ArrayList<BergendePerson>();
 	private static final BergendePersonDAO dao = new BergendePersonDAO();
-    
+	
+	// Injektion der zentralen Bean
 	@Inject
-    private BergendePerson bergendePerson; // Injektion der zentralen Bean
+    private BergendePerson bergendePerson; 
 	
 	// Leerer Konstruktor
 	public LoginController() {
 		bergendenListe = dao.laden();
+		// Nur für Testzwecke!!!!
+		// Nur für Testzwecke!!!!
 		if (bergendenListe.isEmpty()) {
 			this.bergendenListe.add(new BergendePerson("Christoph", "Kolumbus", "+3911111111111", "a", "a"));
 			this.bergendenListe.add(new BergendePerson("Ferdinand", "Magellan", "+3512222222222", "b", "b"));
@@ -37,12 +40,13 @@ public class LoginController implements Serializable {
 		}
 	}	
 
-	
-	public void postValidateName(ComponentSystemEvent ev) throws AbortProcessingException {
+	// Zwischenmethode, um den Benutzernamen zu speichern
+	public void postValidateBenutzerName(ComponentSystemEvent ev) throws AbortProcessingException {
 		UIInput temp = (UIInput)ev.getComponent();
 		this.benutzername = (String)temp.getValue();
 	}
 	
+	// Validierungsmethode für den Login
 	public void validateLogin(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 		for(BergendePerson bP:bergendenListe) {
 			BergendePerson temp=new BergendePerson(this.benutzername, (String)value);

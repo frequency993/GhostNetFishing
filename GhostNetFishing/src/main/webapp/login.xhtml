@@ -17,7 +17,7 @@
 				<span class="ui-float-label">
 					<p:inputText id="benutzername" value="#{loginController.benutzername}" required="true">
 						<f:event type="jakarta.faces.event.PostValidateEvent"
-								 listener="#{loginController.postValidateName}" />
+								 listener="#{loginController.postValidateBenutzerName}" />
 					</p:inputText>
 					<p:outputLabel for="benutzername" value="Benutzername"/>
 				</span>
