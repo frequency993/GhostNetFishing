@@ -70,4 +70,12 @@ public class MeineGeisternetzeController implements Serializable {
     public void setBergendePerson(BergendePerson bergendePerson) {
         this.bergendePerson = bergendePerson;
     }
+
+	public GeisternetzGesamtListe getGeisternetzGesamtListe() {
+		return geisternetzGesamtListe;
+	}
+
+	public void setGeisternetzGesamtListe(GeisternetzGesamtListe geisternetzGesamtListe) {
+		this.geisternetzGesamtListe = geisternetzGesamtListe;
+	}
 }

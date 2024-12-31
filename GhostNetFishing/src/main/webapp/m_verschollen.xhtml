@@ -130,7 +130,7 @@
 	<h2>Geisternetz Übersicht</h2>
 
     <h:form id="netzTabelle">
-	    <p:dataTable var="netz" value="#{geisternetzGesamtListe.filterListe}" 
+	    <p:dataTable var="netz" value="#{mverschollenController.geisternetzGesamtListe.filterListe}" 
 	                 widgetVar="netzTable"
 	                 paginator="true" rows="10" 
 	                 resizableColumns="true" 
@@ -176,7 +176,7 @@
 	        
 	        <!-- Footer-Facette für eine Übersicht -->
 	        <f:facet name="footer">
-	            <h:outputText value="Geisternetze - Total: #{fn:length(geisternetzGesamtListe.filterListe)}" />
+	            <h:outputText value="Geisternetze - Total: #{fn:length(mverschollenController.geisternetzGesamtListe.filterListe)}" />
 	        </f:facet>
 	    </p:dataTable>
     </h:form>

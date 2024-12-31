@@ -115,7 +115,7 @@
 	<h2>Übersicht der noch zu bergenden Geisternetze</h2>
 
     <h:form id="netzTabelle">
-	    <p:dataTable var="netz" value="#{geisternetzGesamtListe.liste}" 
+	    <p:dataTable var="netz" value="#{bergenController.geisternetzGesamtListe.liste}" 
 	                 widgetVar="netzTable"
 	                 paginator="true" rows="10" 
 	                 resizableColumns="true" 
@@ -148,7 +148,9 @@
 	        
 	        <p:column headerText="Bergende Person">
 	             <h:outputText value="#{netz.bergendePerson != null ? 
-       				 netz.bergendePerson.vorname.concat(' ').concat(netz.bergendePerson.nachname).concat(', ').concat(netz.bergendePerson.telefonnummer) : 'Noch niemand eingetragen.'}" />
+       				 netz.bergendePerson.vorname.concat(' ')
+       				 .concat(netz.bergendePerson.nachname)
+       				 .concat(', ').concat(netz.bergendePerson.telefonnummer) : 'Noch niemand eingetragen.'}" />
 	        </p:column>
 	        
 	       	<p:column>
@@ -164,7 +166,7 @@
 	        
 	        <!-- Footer-Facette für eine Übersicht -->
 	        <f:facet name="footer">
-	            <h:outputText value="Geisternetze - Total: #{fn:length(geisternetzGesamtListe.liste)}" />
+	            <h:outputText value="Geisternetze - Total: #{fn:length(bergenController.geisternetzGesamtListe.liste)}" />
 	        </f:facet>
 	    </p:dataTable>
     </h:form>

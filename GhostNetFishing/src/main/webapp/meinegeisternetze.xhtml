@@ -44,7 +44,7 @@
 
     <h:form id="netzTabelle">
 	    <p:dataTable var="netz"
-	                 value="#{geisternetzGesamtListe.filterListe(meineGeisternetzeController.bergendePerson)}"
+	                 value="#{meineGeisternetzeController.geisternetzGesamtListe.filterListe(meineGeisternetzeController.bergendePerson)}"
 	                 paginator="true"
 	                 rows="10"
 	                 resizableColumns="true"
@@ -83,7 +83,7 @@
 	
 	        <!-- Footer für die Gesamtzahl -->
 	        <f:facet name="footer">
-	            <h:outputText value="Geisternetze - Total: #{fn:length(geisternetzGesamtListe.filterListe(meineGeisternetzeController.bergendePerson))}" />
+	            <h:outputText value="Geisternetze - Total: #{fn:length(meineGeisternetzeController.geisternetzGesamtListe.filterListe(meineGeisternetzeController.bergendePerson))}" />
 	        </f:facet>
 	    </p:dataTable>
 	</h:form>

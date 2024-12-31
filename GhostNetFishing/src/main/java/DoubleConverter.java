@@ -15,11 +15,12 @@ public class DoubleConverter implements Converter<Double> {
         }
         try {
             // Ersetzt Komma durch Punkt, falls notwendig
+        	// Wenn beim Parsen ein Fehler auftritt, wird eine ConverterException geworfen
             value = value.replace(',', '.');
             return Double.parseDouble(value);
         } catch (NumberFormatException e) {
             throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-                "Ungültiger Wert. Bitte geben Sie eine Dezimalzahl mit mindestens drei Nachkommastellen ein.", null));
+                "Ungültiger Wert: Bitte geben Sie eine Dezimalzahl ein.", null));
         }
     }
 
