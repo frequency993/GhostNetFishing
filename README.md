@@ -39,22 +39,21 @@ Zunächst muss das Projekt von GitHub heruntergeladen werden. Dies kann durch Kl
    git clone https://github.com/diablo993/GhostNetFishing.git 
 ```
 
-geschen, oder durch herunterladen des Projekts als ZIP und anschließendes entpacken:
-```
-<>Code :arrow_right: Download ZIP
-```  	
+geschen, oder durch herunterladen des Projekts als ZIP und anschließendes entpacken: <br>
+
+*<>Code :arrow_right: Download ZIP*
 
 #### 2. Öffnen in Eclipse als Maven Projekt
-Um zu gewährleisten, das Eclipe das Projekt als Maven-Projekt erkennt und alle Abhängikeiten aus der *pom.xml* korrekt lädt, muss es wie folgt in Eclipse geöffnet werden:
-```
-File :arrow_right: Import... :arrow_right: Existing Maven Projects
-```
+Um zu gewährleisten, das Eclipe das Projekt als Maven-Projekt erkennt und alle Abhängikeiten aus der *pom.xml* korrekt lädt, muss es wie folgt in Eclipse geöffnet werden:<br>
+
+*File :arrow_right: Import... :arrow_right: Existing Maven Projects*
+
 
 #### 3. Installation eines Webservers
-Für das Testsetup wurde ein **Apache Tomcat Server in der Version 10.0 verwendet, mit neueren Versionen kam es zu diversen Fehlern**:
-```
-Servers :arrow_right: No server are [...] :arrow_right: Apache :arrow_right: Tomcat v10.0 Server :arrow_right: Next :arrow_right: Projekt auswählen und mittels Add hinzufügen :arrow_right: Finish
-```
+Für das Testsetup wurde ein **Apache Tomcat Server in der Version 10.0 verwendet, mit neueren Versionen kam es zu diversen Fehlern**:<br>
+
+*Servers :arrow_right: No server are [...] :arrow_right: Apache :arrow_right: Tomcat v10.0 Server :arrow_right: Next :arrow_right: Projekt auswählen und mittels Add hinzufügen :arrow_right: Finish*
+
 #### 4. Installation und Einrichtung der Datenbankumgebung
 Die von der Webanwendung genutzten Einstellungen für die Verbindung zur Datenbank sind der *persistence.xml* zu entnehmen. Wenn die Installation wie hier beschrieben durchgeführt wird, sind keine Anpassungen notwendig. Auf Ausnahmen wird an den entsprechenden Stellen hingewiesen.
 
@@ -66,17 +65,16 @@ Es ist zu beachten, dass standartmäßig die Ports 80,443 und 3306 verwendet wer
 2. Im Anschluss über den Admin-Button des MySQL-Moduls die Seite phpMyAdmin aufrufen. Und dort eine neue Datenbank mit dem Namen **ghostnet-db** anlegen. Als Kollation wurde im Testaufbau **utf8_general_ci** verwendet. <br> Sollte eine andere Datenbankbezeichnung verwendet werden, ist diese ebenfalls in der *persistence.xml* (siehe oben) anzugeben.  
 
 #### 5. (Optional) Importieren des Testdatensatzes
-Wenn gewünscht kann die *hostnet-db.sql* aus dem Ordner *Testdaten* vor der ersten Ausführung der Webanwendung in die Datenbank importiert werden. Die SQL-Datei legt die gewünschte Datenbankstruktur mitsamt elf Geisternetzen und ihren meldenden Personen an. So entfällt die Notwendigkeit eigene Geisternetze anzulegen, bevor mit diesen gearbeitet werden kann.
-```
-phpMyAdmin über XAMPP aufrufen (siehe Abschnitt 4. Punkt 2.) :arrow_right: ghostnet-db :arrow_right: Importieren :arrow_right: Datei auswählen :arrow_right: Importieren
-```
+Wenn gewünscht kann die *hostnet-db.sql* aus dem Ordner *Testdaten* vor der ersten Ausführung der Webanwendung in die Datenbank importiert werden. Die SQL-Datei legt die gewünschte Datenbankstruktur mitsamt elf Geisternetzen und ihren meldenden Personen an. So entfällt die Notwendigkeit eigene Geisternetze anzulegen, bevor mit diesen gearbeitet werden kann.<br>
+
+*phpMyAdmin über XAMPP aufrufen (siehe Abschnitt 4. Punkt 2.) :arrow_right: ghostnet-db :arrow_right: Importieren :arrow_right: Datei auswählen :arrow_right: Importieren*
 
 #### 6. Ausführen der Webanwendung
 
 Nach dem einmaligen Einrichten der Testumgebung nach o.g. Anleitung bestehen die Schritte zum Ausführen nur noch aus den Folgenden:
 - Apache und MySQL über XAMPP starten *(bei erstmaliger Einrichtung nach o.g. Anleitung bereits gestartet)*.
-- Projekt über Webserver in Eclipse starten. <br>
-```index.xhtml im Project Explorer auswählen :arrow_right: Rechtsklick auf den installierten Server :arrow_right: start ```
+- Projekt über Webserver in Eclipse starten: <br>
+*index.xhtml im Project Explorer auswählen :arrow_right: Rechtsklick auf den installierten Server :arrow_right: start*
 Sollte die index.xhtml nicht automatisch geöffnet werden, einen Browser öffnen und *http://localhost:8080/GhostNetFishing/index.xhtml* eingeben.
 
 Im Anschluss kann die Webanwendung getestet werden.
