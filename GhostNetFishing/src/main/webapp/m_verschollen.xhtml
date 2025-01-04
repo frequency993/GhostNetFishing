@@ -63,7 +63,7 @@
 			        <p:outputLabel for="telefonnummer" value="Telefonnummer:"/>
 					<p:inputText id="telefonnummer" value="#{mverschollenController.verschollenMeldendePerson.telefonnummer}" required="true"
 				             label="Telefonnummer" placeholder="Format: +49170123456 - ohne Leerzeichen"
-				             validatorMessage="Die Telefonnummer muss dem Format: '+49170123456 - ohne Leerzeichen' entsprechen">
+				             validatorMessage="Die Telefonnummer muss dem Format: '+49170123456 - ohne Leerzeichen' entsprechen und mind. 10 / max. 15 Zeichen besitzen.">
 				    <f:validateRegex pattern="^\+[1-9]\d{9,14}$"/>
 					</p:inputText>
 			
@@ -152,7 +152,7 @@
 	            <h:outputText value="#{netz.gps.laengengrad}" />
 	        </p:column>
 	        
-	        <p:column headerText="Größe" sortBy="#{netz.groesse}">
+	        <p:column headerText="Größe in m²" sortBy="#{netz.groesse}">
 	            <h:outputText value="#{netz.groesse}" />
 	        </p:column>
 	        
