@@ -69,7 +69,7 @@ Wenn gewünscht kann die *hostnet-db.sql* aus dem Ordner *Testdaten* vor der ers
 
 *phpMyAdmin über XAMPP aufrufen (siehe Abschnitt 4. Punkt 2.) :arrow_right: ghostnet-db :arrow_right: Importieren :arrow_right: Datei auswählen :arrow_right: Importieren*
 
-#### 6. Ausführen der Webanwendung
+### 4. Ausführen der Webanwendung
 
 Nach dem einmaligen Einrichten der Testumgebung nach o.g. Anleitung bestehen die Schritte zum Ausführen nur noch aus den Folgenden:
 - Apache und MySQL über XAMPP starten *(bei erstmaliger Einrichtung nach o.g. Anleitung bereits gestartet)*.
