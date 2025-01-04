@@ -18,14 +18,14 @@ Die gesamte Webanwendung wurde auf einem Notebook mit folgender Konfiguration ge
 - **Hardware**: 64 GB Arbeitsspeicher / Intel i9 Prozessor  
 
 ### 2. Verwendete Software
-Hier wird nur manuell installierte Software aufgeführt. Durch Maven verwaltete Pakete und Abhängikeiten können der  pom.xml entnommen werden.
+Hier wird nur Software aufgeführt, welche nicht durch Maven verwaltet wird. Durch Maven verwaltete Pakete und Abhängikeiten können der  pom.xml entnommen werden.
 
 **IDE**  
    - Eclipse Version: 2024-12 (4.34.0)
 
 **Java Runtime Environment (JRE)**
    - JRE Version 21.0.5 (mitgeliefert in o.g. Eclipse-Version)<br> 
-   :arrow_right: Die Fehlermeldungen in Eclipse bezüglich Java 11 und Java 21 haben in diesem Fall keine Auswirkungen und können ignoriert werden. 
+   :arrow_right: Die Fehlermeldungen in Eclipse bezüglich Java 11 und Java 21 haben für hiesige Anwendung keine Auswirkungen und können ignoriert werden. 
 
 **Datenbankumgebung**
    - XAMPP Version 3.3.0 
@@ -39,12 +39,12 @@ Zunächst muss das Projekt von GitHub heruntergeladen werden. Dies kann durch Kl
    git clone https://github.com/diablo993/GhostNetFishing.git 
 ```
 
-geschen, oder durch herunterladen des Projekts als ZIP und anschließendes entpacken: <br>
+geschehen, oder durch herunterladen des Projekts als ZIP und anschließendes Entpacken: <br>
 
-*<>Code :arrow_right: Download ZIP*
+*Navigieren sie auf der Seite des Repository zu <>Code :arrow_right: Download ZIP*
 
 #### 2. Öffnen in Eclipse als Maven Projekt
-Um zu gewährleisten, das Eclipe das Projekt als Maven-Projekt erkennt und alle Abhängikeiten aus der *pom.xml* korrekt lädt, muss es wie folgt in Eclipse geöffnet werden:<br>
+Um zu gewährleisten, dass Eclipse das Projekt als Maven-Projekt erkennt und alle Abhängigkeiten aus der *pom.xml* korrekt lädt, muss es wie folgt in Eclipse geöffnet werden:<br>
 
 *File :arrow_right: Import... :arrow_right: Existing Maven Projects*
 
@@ -58,7 +58,7 @@ Für das Testsetup wurde ein **Apache Tomcat Server in der Version 10.0 verwende
 Die von der Webanwendung genutzten Einstellungen für die Verbindung zur Datenbank sind der *persistence.xml* zu entnehmen. Wenn die Installation wie hier beschrieben durchgeführt wird, sind keine Anpassungen notwendig. Auf Ausnahmen wird an den entsprechenden Stellen hingewiesen.
 
 1. Nach der Installation von XAMPP, das Programm starten und sowohl den Apache, als auch den MySQL-Server starten. <br>
-Es ist zu beachten, dass standartmäßig die Ports 80,443 und 3306 verwendet werden. Sind diese Ports anderweitig in Verwendung, können die Ports über den entsprechenden Eintrag in der Config-Datei (Konfig-Button) geändert werden. **Die Änderung des Ports 3306 des MySQL-Moduls müssen in der *persistence.xml* eingetragen werden:**
+Es ist zu beachten, dass standardmäßig die Ports 80, 443 und 3306 verwendet werden. Sind diese Ports anderweitig in Verwendung, können die Ports über den entsprechenden Eintrag in der Config-Datei (Konfig-Button) geändert werden. **Die Änderung des Ports 3306 des MySQL-Moduls muss in der *persistence.xml* eingetragen werden:**
 
 ```code <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ghostnet-db"/>```
 
@@ -75,6 +75,6 @@ Nach dem einmaligen Einrichten der Testumgebung nach o.g. Anleitung bestehen die
 - Apache und MySQL über XAMPP starten *(bei erstmaliger Einrichtung nach o.g. Anleitung bereits gestartet)*.
 - Projekt über Webserver in Eclipse starten: <br>
 *index.xhtml im Project Explorer auswählen :arrow_right: Rechtsklick auf den installierten Server :arrow_right: start*
-Sollte die index.xhtml nicht automatisch geöffnet werden, einen Browser öffnen und *http://localhost:8080/GhostNetFishing/index.xhtml* eingeben.
+Sollte die index.xhtml nicht automatisch geöffnet werden, öffne einen Browser und navigiere zu *http://localhost:8080/GhostNetFishing/index.xhtml*
 
 Im Anschluss kann die Webanwendung getestet werden.
