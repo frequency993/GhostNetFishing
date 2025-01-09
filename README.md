@@ -36,7 +36,7 @@ Hier wird nur Software aufgeführt, welche nicht durch Maven verwaltet wird. Dur
  
 Zunächst muss das Projekt von GitHub heruntergeladen werden. Dies kann durch Klonen über git mittels: 
 ```shell
-   git clone https://github.com/diablo993/GhostNetFishing.git 
+   git clone https://github.com/frequency993/GhostNetFishing.git
 ```
 
 geschehen, oder durch herunterladen des Projekts als ZIP und anschließendes Entpacken: <br>
@@ -60,7 +60,7 @@ Die von der Webanwendung genutzten Einstellungen für die Verbindung zur Datenba
 1. Nach der Installation von XAMPP, das Programm starten und sowohl den Apache, als auch den MySQL-Server starten. <br>
 Es ist zu beachten, dass standardmäßig die Ports 80, 443 und 3306 verwendet werden. Sind diese Ports anderweitig in Verwendung, können die Ports über den entsprechenden Eintrag in der Config-Datei (Konfig-Button) geändert werden. **Die Änderung des Ports 3306 des MySQL-Moduls muss in der *persistence.xml* eingetragen werden:**
 
-```code <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ghostnet-db"/>```
+``` <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ghostnet-db"/>```
 
 2. Im Anschluss über den Admin-Button des MySQL-Moduls die Seite phpMyAdmin aufrufen. Und dort eine neue Datenbank mit dem Namen **ghostnet-db** anlegen. Als Kollation wurde im Testaufbau **utf8_general_ci** verwendet. <br> Sollte eine andere Datenbankbezeichnung verwendet werden, ist diese ebenfalls in der *persistence.xml* (siehe oben) anzugeben.  
 
