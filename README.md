@@ -22,7 +22,7 @@ Hier wird nur Software aufgeführt, welche nicht durch Maven verwaltet wird. Dur
 
 **IDE**  
    - Eclipse IDE for Enterprise Java and Web Developers Version: 2024-12 (4.34.0) <br>
-   [Eclipse Installer herunterladen](https://www.eclipse.org/downloads/packages/) ➡️ Bei der Installation "Eclipe IDE for Enterprise Java Web Developers" auswählen ➡️ JRE 21.0.5 auswählen
+   [Eclipse Installer herunterladen](https://www.eclipse.org/downloads/packages/) ➡️ Bei der Installation "Eclipe IDE for Enterprise Java Web Developers" auswählen ➡️ JRE 21.0.5 auswählen ➡️ installieren
 
 **Java Runtime Environment (JRE)**
    - JRE Version 21.0.5 (mitgeliefert in o.g. Eclipse-Version)<br> 
@@ -30,7 +30,7 @@ Hier wird nur Software aufgeführt, welche nicht durch Maven verwaltet wird. Dur
 
 **Datenbankumgebung**
    - XAMPP für Windows 8.2.12 / PHP 8.2.12<br>
-   ➡️
+   ➡️ [XAMPP 8.2.12 / PHP 8.2.12 herunterladen](https://www.apachefriends.org/de/download.html) ➡️ installieren
 
 ### 3. Installation & Setup
 
