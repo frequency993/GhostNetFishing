@@ -21,14 +21,16 @@ Die gesamte Webanwendung wurde auf einem Notebook mit folgender Konfiguration ge
 Hier wird nur Software aufgeführt, welche nicht durch Maven verwaltet wird. Durch Maven verwaltete Pakete und Abhängikeiten können der  pom.xml entnommen werden.
 
 **IDE**  
-   - Eclipse Version: 2024-12 (4.34.0)
+   - Eclipse IDE for Enterprise Java and Web Developers Version: 2024-12 (4.34.0) <br>
+   [Eclipse Installer herunterladen](https://www.eclipse.org/downloads/packages/) ➡️ Bei der Installation "Eclipe IDE for Enterprise Java Web Developers" auswählen ➡️ JRE 21.0.5 auswählen
 
 **Java Runtime Environment (JRE)**
    - JRE Version 21.0.5 (mitgeliefert in o.g. Eclipse-Version)<br> 
    :arrow_right: Die Fehlermeldungen in Eclipse bezüglich Java 11 und Java 21 haben für hiesige Anwendung keine Auswirkungen und können ignoriert werden. 
 
 **Datenbankumgebung**
-   - XAMPP Version 3.3.0 
+   - XAMPP für Windows 8.2.12 / PHP 8.2.12<br>
+   ➡️
 
 ### 3. Installation & Setup
 
