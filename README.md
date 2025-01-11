@@ -14,8 +14,8 @@ Im Folgenden wird das verwendete Testsetup beschrieben. Bei etwaigen Problemen m
 
 ### 1. Hardware / Betriebssystem
 Die gesamte Webanwendung wurde auf einem Notebook mit folgender Konfiguration gehostet und auch getestet:
-- **Betriebssystem**: Windows 11 Pro / Version 10.0.26100 Build 26100
-- **Hardware**: 64 GB Arbeitsspeicher / Intel i9 Prozessor  
+- **Betriebssystem**: Windows 11 Pro / Version 10.0.26100, Build 26100
+- **Hardware**: 64 GB Arbeitsspeicher / Intel(R) Core(TM) i9-14900HX Prozessor
 
 ### 2. Verwendete Software
 Hier wird nur Software aufgeführt, welche nicht durch Maven verwaltet wird. Durch Maven verwaltete Pakete und Abhängikeiten können der  pom.xml entnommen werden.
