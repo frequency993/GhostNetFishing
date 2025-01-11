@@ -48,7 +48,7 @@ geschehen, oder durch herunterladen des Projekts als ZIP und anschließendes Ent
 #### 2. Öffnen in Eclipse als Maven Projekt
 Um zu gewährleisten, dass Eclipse das Projekt als Maven-Projekt erkennt und alle Abhängigkeiten aus der *pom.xml* korrekt lädt, muss es wie folgt in Eclipse geöffnet werden:<br>
 
-*File :arrow_right: Import... :arrow_right: Existing Maven Projects*
+*File :arrow_right: Import... :arrow_right: Maven ➡️ Existing Maven Projects* ➡️ Ornder von GhostNetFishing auswählen ➡️ finish
 
 
 #### 3. Installation eines Webservers
